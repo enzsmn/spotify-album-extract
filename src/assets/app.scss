@@ -1,0 +1,130 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
+
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Set your colors
+$primary: #39b166;
+$primary-invert: findColorInvert($primary);
+
+// Setup $colors to use as Bulma classes (e.g. 'is-twitter')
+$colors: (
+  "primary": ($primary, $primary-invert),
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+html, body {
+  background: rgb(28, 30, 32);
+  color: #fff;
+  font-family: 'Varela Round', sans-serif;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 20px auto;
+}
+
+.container {
+  padding: 0 20px;
+}
+
+.page {
+  &-home {
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
+    }
+    .button {
+      margin-top: 40px;
+    }
+  }
+}
+
+h1 {
+  font-size: 1.6em;
+  font-weight: lighter;
+  span {
+    font-weight: bold;
+  }
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+.button {
+  transition-duration: .2s;
+}
+
+.small {
+  font-size: .8em;
+}
+
+.muted {
+  color: rgb(90, 94, 100);
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.column {
+  flex: 0 0 49%;
+  background: rgb(35, 38, 42);
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+}
+
+.item {
+  align-items: center;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  margin-top: 10px;
+  padding: 10px 0;
+  transition: .3s ease;
+  img {
+    border-radius: 3px;
+    object-fit: cover;
+    object-position: center;
+    width: 80px;
+    height: 80px;
+  }
+  .item-title {
+    flex-grow: 1;
+    margin: 0 20px;
+  }
+  &:hover, &.selected {
+    background: rgb(34, 36, 38);
+    box-shadow: 0 10px 20px rgb(28, 30, 32);
+    color: #fff;
+  }
+}
+
+.select-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  .button + .button {
+    margin-left: 8px;
+  }
+}
