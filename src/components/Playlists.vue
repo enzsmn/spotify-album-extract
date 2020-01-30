@@ -90,7 +90,7 @@
             this.authorization.access_token = localStorage.getItem('spotify_access_token');
             this.authorization.user_id = localStorage.getItem('spotify_user_id');
 
-            axios.defaults.headers.common['Authorization'] = 'Bearer' + this.authorization.access_token;
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.authorization.access_token;
             axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
 
            this.setupAxios();
