@@ -42,7 +42,8 @@
                     <img :src="album.images[0].url" v-if="album.images.length">
                     <h3 class="item-title">
                         {{ album.name }}<br>
-                        <span class="muted">{{ album.artists.map(a => a.name).join(', ') }}</span>
+                        <span class="muted">{{ album.artists.map(a => a.name).join(', ') }}</span><br/>
+                        <span class="muted small">{{ album.total_tracks }} tracks</span><br/>
                     </h3>
                     <b-checkbox v-model="album.selected" disabled />
                 </a>
