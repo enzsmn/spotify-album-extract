@@ -21,7 +21,7 @@
                     <img :src="playlist.images[0].url" v-if="playlist.images.length">
                     <h3 class="item-title">
                         {{ playlist.name }}<br/>
-                        <span class="small muted">{{ playlist.tracks.total }} tracks</span>
+                        <span class="small muted">{{ playlist.tracks.total }} {{ playlist.tracks.total > 1 ? 'tracks' : 'track' }}</span>
                     </h3>
                 </a>
             </div>
@@ -43,7 +43,7 @@
                     <h3 class="item-title">
                         {{ album.name }}<br>
                         <span class="muted">{{ album.artists.map(a => a.name).join(', ') }}</span><br/>
-                        <span class="muted small">{{ album.total_tracks }} tracks</span><br/>
+                        <span class="small muted">{{ album.total_tracks }} {{ album.total_tracks > 1 ? 'tracks' : 'track' }}</span>
                     </h3>
                     <b-checkbox v-model="album.selected" disabled />
                 </a>
