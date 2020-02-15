@@ -195,7 +195,7 @@
             },
             createPlaylist() {
                 return axios.post('https://api.spotify.com/v1/users/' + localStorage.getItem('spotify_user_id') + '/playlists', {
-                    name: 'Album extract',
+                    name: `${this.selectedPlaylist.name} – Albums`,
                     public: false,
                     description: `Albums extracted from “${this.selectedPlaylist.name}” on ${moment().format('YYYY-MM-DD')} with ${this.cleanUrl}`,
                 })
