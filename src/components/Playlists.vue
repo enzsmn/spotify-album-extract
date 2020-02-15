@@ -128,6 +128,10 @@
                     });
             },
             selectPlaylist(playlist) {
+                if (this.selectedPlaylist === playlist) {
+                    return false;
+                }
+
                 this.selectedPlaylist = playlist;
 
                 // Get selected playlist's tracks
