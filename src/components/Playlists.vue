@@ -3,7 +3,15 @@
 
         <div class="buttons">
             <h1>Spotify <span>album extract</span></h1>
-            <b-button type="is-primary is-rounded" class="is-pulled-right" @click="save" :disabled="!selectedAlbums.length">Save to new playlist</b-button>
+            <b-button
+                v-if="selectedPlaylist"
+                type="is-primary is-rounded"
+                class="is-pulled-right"
+                @click="save"
+                :disabled="!selectedAlbums.length"
+            >
+                Save to new playlist
+            </b-button>
         </div>
 
         <div class="columns">
