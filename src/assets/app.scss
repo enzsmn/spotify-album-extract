@@ -131,6 +131,11 @@ h2 {
   }
 }
 
+.b-checkbox.checkbox.is-disabled {
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
 .copyright {
   position: fixed;
   right: 10px;
