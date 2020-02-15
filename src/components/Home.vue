@@ -22,9 +22,6 @@
                     + '&state=' + process.env.VUE_APP_SPOTIFY_STATE;
             },
         },
-        mounted() {
-            console.log(encodeURI(process.env.VUE_APP_SPOTIFY_SCOPE));
-        },
         methods: {
             auth() {
                 window.location = this.authUrl;
