@@ -2,7 +2,7 @@
     <div class="page-playlists">
 
         <div class="buttons">
-            <h1>Spotify <span>album extract</span></h1>
+            <h1><a href="/">Spotify <span>album extract</span></a></h1>
             <b-button
                 v-if="selectedPlaylist"
                 type="is-primary is-rounded"

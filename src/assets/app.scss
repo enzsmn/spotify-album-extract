@@ -56,10 +56,19 @@ h1 {
   span {
     font-weight: bold;
   }
+  a {
+    color: #fff;
+  }
 }
 
 h2 {
   font-size: 1.3em;
+}
+
+a {
+  &:hover {
+    color: inherit;
+  }
 }
 
 .button {
