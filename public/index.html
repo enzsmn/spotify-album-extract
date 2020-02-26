@@ -10,6 +10,7 @@
     <meta property="og:url" content="https://spotify-album-extract.nozem.space/" />
     <!--<meta property="og:image" content="https://spotify-album-extract.nozem.space/og.jpg" />-->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="/js/outdatedbrowser/outdatedbrowser.min.css">
     <title>Spotify album extract</title>
   </head>
   <body>
@@ -20,6 +21,33 @@
 
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+
+    <script src="/js/outdatedbrowser/outdatedbrowser.min.js"></script>
+    <div id="outdated"></div>
+    <script>
+      function addLoadEvent(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+          window.onload = func;
+        } else {
+          window.onload = function() {
+            if (oldonload) {
+              oldonload();
+            }
+            func();
+          }
+        }
+      }
+      addLoadEvent(function(){
+        outdatedBrowser({
+          bgColor: '#F21843',
+          color: '#FFFFFF',
+          lowerThan: 'IE11',
+          languagePath: '/js/outdatedbrowser/lang/en.html'
+        })
+      });
+    </script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157341487-1"></script>
     <script>
