@@ -94,6 +94,10 @@ a {
   justify-content: space-between;
   margin-top: 20px;
   max-height: calc(100vh - 120px);
+  @media (max-width: 1000px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .column {
@@ -103,6 +107,10 @@ a {
   overflow-y: scroll;
   padding: 20px;
   position: relative;
+  @media (max-width: 1000px) {
+    flex: 0 0 90%;
+    margin-bottom: 50px;
+  }
 }
 
 .item {
@@ -111,7 +119,7 @@ a {
   color: #fff;
   display: flex;
   margin-top: 10px;
-  padding: 10px 0;
+  padding: 10px 10px;
   transition: .3s ease;
   img {
     border-radius: 3px;
@@ -139,6 +147,13 @@ a {
   .button + .button {
     margin-left: 8px;
   }
+  @media (max-width: 1000px) {
+    position: relative;
+    top: unset;
+    right: unset;
+    margin: 20px auto;
+    text-align: right;
+  }
 }
 
 .b-checkbox.checkbox.is-disabled {
@@ -150,4 +165,11 @@ a {
   position: fixed;
   right: 10px;
   bottom: 10px;
+
+  @media (max-width: 1000px) {
+    right: unset;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
 }
