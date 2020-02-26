@@ -36,7 +36,7 @@
 
             <div v-if="selectedPlaylist" class="column">
                 <h2 class="muted">Select albums</h2>
-                <p class="muted small">Found {{ albums.length }} albums, {{ selectedAlbums.length }} selected</p>
+                <p class="muted small">Found {{ albums.length }} albums, {{ selectedAlbums.length }} selected, containing {{ selectedAlbumsTracks }} tracks</p>
                 <div class="select-buttons">
                     <b-button type="is-primary is-rounded is-outlined" @click="selectedAllAlbums">Select all</b-button>
                     <b-button type="is-primary is-rounded is-outlined" @click="deselectedAllAlbums">Deselect all</b-button>
@@ -91,6 +91,13 @@
             },
             selectedAlbums() {
                 return this.albums.filter(a => a.selected);
+            },
+            selectedAlbumsTracks() {
+                let count = 0;
+                this.selectedAlbums.forEach(a => {
+                    count += a.total_tracks;
+                });
+                return count;
             },
         },
         mounted() {
