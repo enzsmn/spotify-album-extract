@@ -46,6 +46,7 @@
                     v-for="album in albums"
                     :key="album.id"
                     class="item"
+                    :class="{ 'selected': album.selected }"
                     @click="selectAlbum(album)"
                 >
                     <img :src="album.images[0].url" v-if="album.images.length">
