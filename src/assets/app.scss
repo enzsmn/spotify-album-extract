@@ -139,7 +139,15 @@ a {
   }
   .item-title {
     flex-grow: 1;
-    margin: 0 20px;
+    margin-left: 20px;
+    overflow-x: hidden;
+    span {
+      display: inline-block;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
   }
   &:hover, &.selected {
     background: rgb(34, 36, 38);

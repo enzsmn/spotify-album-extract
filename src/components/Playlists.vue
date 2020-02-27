@@ -28,7 +28,7 @@
                 >
                     <img :src="playlist.images[0].url" v-if="playlist.images.length">
                     <h3 class="item-title">
-                        {{ playlist.name }}<br/>
+                        <span>{{ playlist.name }}</span><br/>
                         <span class="small muted">{{ playlist.tracks.total }} {{ playlist.tracks.total > 1 ? 'tracks' : 'track' }}</span>
                     </h3>
                 </a>
@@ -49,7 +49,7 @@
                 >
                     <img :src="album.images[0].url" v-if="album.images.length">
                     <h3 class="item-title">
-                        {{ album.name }}<br>
+                        <span>{{ album.name }}</span><br>
                         <span class="muted">{{ album.artists.map(a => a.name).join(', ') }}</span><br/>
                         <span class="small muted">{{ album.total_tracks }} {{ album.total_tracks > 1 ? 'tracks' : 'track' }}</span>
                     </h3>
