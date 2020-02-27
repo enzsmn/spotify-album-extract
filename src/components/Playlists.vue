@@ -6,7 +6,7 @@
             <b-button
                 v-if="selectedPlaylist"
                 type="is-primary is-rounded"
-                class="is-pulled-right"
+                class="is-pulled-right button-save-playlist"
                 @click="save"
                 :disabled="!selectedAlbums.length"
             >
@@ -35,7 +35,7 @@
                 </a>
             </div>
 
-            <div v-if="selectedPlaylist" class="column">
+            <div v-if="selectedPlaylist" class="column albums">
                 <h2 class="muted">Select albums</h2>
                 <p class="muted small">{{ albums.length }}/{{ selectedAlbumsTracksCount }} albums selected, {{ selectedAlbums.length }} tracks in total</p>
                 <div class="select-buttons">
