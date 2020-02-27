@@ -16,7 +16,7 @@
 
         <div class="columns">
 
-            <div v-if="playlists" class="column">
+            <div v-if="playlists.length > 0" class="column playlists" :class="{ 'playlist-selected': selectedPlaylist }">
                 <h2 class="muted">Select playlist</h2>
                 <p class="muted small">Found {{ playlists.length }} playlists</p>
                 <a
@@ -31,6 +31,7 @@
                         <span>{{ playlist.name }}</span><br/>
                         <span class="small muted">{{ playlist.tracks.total }} {{ playlist.tracks.total > 1 ? 'tracks' : 'track' }}</span>
                     </h3>
+                    <b-button type="is-primary is-rounded is-outlined" class="button-clear" @click.stop="deselectPlaylist">&times;</b-button>
                 </a>
             </div>
 
@@ -162,6 +163,10 @@
                             }
                         });
                     });
+            },
+            deselectPlaylist() {
+                this.selectedPlaylist = null;
+                this.albums = [];
             },
             selectAlbum(album) {
                 album.selected = !album.selected;
