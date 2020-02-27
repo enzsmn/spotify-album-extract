@@ -66,6 +66,9 @@ h1 {
   a {
     color: #fff;
   }
+  @media (max-width: 1000px) {
+    text-align: center;
+  }
 }
 
 h2 {
@@ -111,7 +114,7 @@ a {
   display: flex;
   justify-content: space-between;
   @media (max-width: 1000px) {
-    justify-content: center;
+    display: block;
   }
 }
 
