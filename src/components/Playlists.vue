@@ -102,6 +102,17 @@
                 return count;
             },
         },
+        watch: {
+            selectedAlbumsTracksCount(val) {
+                if (val >= 10000) {
+                    this.$buefy.snackbar.open({
+                        type: 'is-primary',
+                        message: 'Spotify has a 10000 tracks limit on playlists',
+                        position: 'is-top',
+                    });
+                }
+            },
+        },
         mounted() {
             this.authorization.code = localStorage.getItem('spotify_auth_code');
             this.authorization.refresh_token = localStorage.getItem('spotify_refresh_token');
