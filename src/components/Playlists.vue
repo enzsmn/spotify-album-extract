@@ -35,7 +35,7 @@
                 </a>
             </div>
 
-            <div v-if="selectedPlaylist" class="column albums">
+            <div v-if="selectedPlaylist && albums.length > 0" class="column albums">
                 <h2 class="muted">Select albums</h2>
                 <p class="muted small">{{ selectedAlbums.length }}/{{ albums.length }} albums selected, {{ selectedAlbumsTracksCount }} tracks in total</p>
                 <div class="select-buttons">
