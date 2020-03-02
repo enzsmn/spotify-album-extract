@@ -26,7 +26,7 @@
                     :class="{ 'selected': playlist === selectedPlaylist }"
                     @click="selectPlaylist(playlist)"
                 >
-                    <img :src="playlist.images[0].url" v-if="playlist.images.length">
+                    <img :src="playlist.images.length ? playlist.images[0].url : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC'">
                     <h3 class="item-title">
                         <span>{{ playlist.name }}</span><br/>
                         <span class="small muted">{{ playlist.tracks.total }} {{ playlist.tracks.total > 1 ? 'tracks' : 'track' }}</span>
@@ -49,7 +49,7 @@
                     :class="{ 'selected': album.selected }"
                     @click="selectAlbum(album)"
                 >
-                    <img :src="album.images[0].url" v-if="album.images.length">
+                    <img :src="album.images.length ? album.images[0].url : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC'">
                     <h3 class="item-title">
                         <span>{{ album.name }}</span><br>
                         <span class="muted">{{ album.artists.map(a => a.name).join(', ') }}</span><br/>
