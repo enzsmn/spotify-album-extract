@@ -47,20 +47,23 @@ html, body {
     h1 {
       font-size: 3em;
       margin-bottom: 30px;
-      @media (max-width: 1000px) {
-        font-size: 1.6em;
-      }
     }
     .button {
       margin-top: 40px;
-      @media (max-width: 1000px) {
+    }
+    .copyright {
+      bottom: 10px;
+    }
+    @media (max-width: 1000px) {
+      h1 {
+        font-size: 1.6em;
+      }
+      .button {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
       }
-    }
-    p {
-      @media (max-width: 1000px) {
+      p {
         text-align: center;
       }
     }
