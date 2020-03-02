@@ -51,7 +51,7 @@ html, body {
     .button {
       margin-top: 40px;
     }
-    .copyright {
+    & + .copyright {
       bottom: 10px;
     }
     @media (max-width: 1000px) {
