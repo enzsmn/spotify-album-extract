@@ -53,6 +53,16 @@ html, body {
     }
     .button {
       margin-top: 40px;
+      @media (max-width: 1000px) {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    p {
+      @media (max-width: 1000px) {
+        text-align: center;
+      }
     }
   }
 }
@@ -119,27 +129,32 @@ a {
   }
 }
 
-.columns {
+.panels {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   max-height: calc(100vh - 120px);
   @media (max-width: 1000px) {
-    flex-wrap: wrap;
-    justify-content: center;
+    display: block;
   }
 }
 
-.column {
+.panel {
   flex: 0 0 49%;
   background: rgb(35, 38, 42);
   border-radius: 20px;
   overflow-y: scroll;
-  padding: 20px;
+  padding: 20px 20px 10px;
   position: relative;
+  .panel-title {
+    margin-bottom: 15px;
+  }
   @media (max-width: 1000px) {
     flex: 0 0 90%;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    &.albums {
+      margin-bottom: 90px;
+    }
   }
 }
 
@@ -232,7 +247,7 @@ a {
 .copyright {
   position: fixed;
   right: 10px;
-  bottom: 10px;
+  bottom: 65px;
 
   @media (max-width: 1000px) {
     right: unset;

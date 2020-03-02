@@ -14,11 +14,13 @@
             </b-button>
         </div>
 
-        <div class="columns">
+        <div class="panels">
 
-            <div v-if="playlists.length > 0" class="column playlists" :class="{ 'playlist-selected': selectedPlaylist }">
-                <h2 class="muted">Select playlist</h2>
-                <p class="muted small">Found {{ playlists.length }} playlists</p>
+            <div v-if="playlists.length > 0" class="panel playlists" :class="{ 'playlist-selected': selectedPlaylist }">
+                <div class="panel-title">
+                    <h2 class="muted">Select playlist</h2>
+                    <p class="muted small">Found {{ playlists.length }} playlists</p>
+                </div>
                 <a
                     v-for="playlist in playlists"
                     :key="playlist.id"
@@ -35,9 +37,11 @@
                 </a>
             </div>
 
-            <div v-if="selectedPlaylist && albums.length > 0" class="column albums">
-                <h2 class="muted">Select albums</h2>
-                <p class="muted small">{{ selectedAlbums.length }}/{{ albums.length }} albums selected, {{ selectedAlbumsTracksCount }} tracks in total</p>
+            <div v-if="selectedPlaylist && albums.length > 0" class="panel albums">
+                <div class="panel-title">
+                    <h2 class="muted">Select albums</h2>
+                    <p class="muted small">{{ selectedAlbums.length }}/{{ albums.length }} albums selected, {{ selectedAlbumsTracksCount }} tracks in total</p>
+                </div>
                 <div class="select-buttons">
                     <b-button type="is-primary is-rounded is-outlined" @click="selectedAllAlbums">Select all</b-button>
                     <b-button type="is-primary is-rounded is-outlined" @click="deselectedAllAlbums">Deselect all</b-button>
