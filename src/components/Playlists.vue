@@ -100,7 +100,7 @@
                 if (val >= 10000) {
                     this.$buefy.snackbar.open({
                         type: 'is-primary',
-                        message: 'Spotify has a 10000 tracks limit on playlists',
+                        message: 'Spotify playlists have a 10000 tracks limit, some tracks might not be added',
                         position: 'is-top',
                     });
                 }
