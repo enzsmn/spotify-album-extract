@@ -119,10 +119,37 @@ const createPlaylist = (name) => {
     });
 };
 
-const addTracksToPlaylist = (playlistId, uris) => {
-    return axios.post(`${ SPOTIFY_API }/playlists/${ playlistId }/tracks`, {
-        uris: uris,
-    })
+const addTracksToPlaylist = (playlistId, tracks) => {
+    const chunks = [...chunk(tracks, 100)[0]];
+
+    return new Promise((resolve) => {
+        let promises = [];
+        let count = 0;
+        chunks.forEach(c => {
+            promises.push(
+                axios.post(`${ SPOTIFY_API }/playlists/${ playlistId }/tracks`, {
+                    uris: c,
+                }).then(() => {
+                    count += c.length;
+                })
+            )
+        });
+        Promise.all(promises).then(() => {
+            console.log('Added ' + count + ' tracks to playlist');
+            resolve();
+        });
+    });
+};
+
+const chunk = (arr, size) => {
+    let i, j, tmp, chunks = [];
+
+    for (i = 0, j = arr.length; i < j; i += size) {
+        tmp = arr.slice(i , i + size);
+        chunks.push(tmp);
+    }
+
+    return chunks;
 };
 
 export default {

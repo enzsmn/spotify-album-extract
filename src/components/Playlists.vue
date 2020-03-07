@@ -224,27 +224,10 @@
                     });
             },
             addTracksToNewPlaylist() {
-                return new Promise((resolve) => {
-
-                    let promises = [];
-                    let count = 0;
-
-                    this.tracksToAdd.forEach(chunk => {
-                        promises.push(
-                            SpotifyService.addTracksToPlaylist(this.newPlaylistId, chunk)
-                                .then((res) => {
-                                    console.log('Added ' + chunk.length + ' tracks to playlist', res);
-                                    count += chunk.length;
-                                }),
-                        )
+                return SpotifyService.addTracksToPlaylist(this.newPlaylistId, this.tracksToAdd)
+                    .then(() => {
+                        console.log('Added all tracks to playlist');
                     });
-
-                    Promise.all(promises).then(() => {
-                        console.log('Added ' + count + ' tracks to playlist');
-                        resolve();
-                    });
-
-                });
             },
             chunk(arr, size) {
                 let i, j, tmp, chunks = [];
