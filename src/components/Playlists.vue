@@ -14,6 +14,8 @@
             </b-button>
         </div>
 
+        <a class="logout muted small" @click="logout">Logout</a>
+
         <div class="panels">
 
             <div v-if="playlists.length > 0" class="panel playlists" :class="{ 'playlist-selected': selectedPlaylist }">
@@ -253,6 +255,18 @@
                 }
 
                 return chunks
+            },
+            logout() {
+                this.authorization = {};
+
+                localStorage.removeItem('spotify_auth_code');
+                localStorage.removeItem('spotify_refresh_token');
+                localStorage.removeItem('spotify_access_token');
+                localStorage.removeItem('spotify_user_id');
+                localStorage.removeItem('spotify_expires');
+                localStorage.removeItem('spotify_auth_state');
+
+                this.$router.push({ name: 'Home' });
             },
         }
     }
