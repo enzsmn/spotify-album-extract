@@ -57,7 +57,7 @@ const getPlaylists = () => {
                    offset += res.data.items.length;
 
                    if (res.data.total > offset) {
-                       if (offset % 0 === 0) {
+                       if (offset % 200 === 0) {
                            setTimeout(cb, 1000);
                        } else {
                            cb();
