@@ -12,19 +12,14 @@
 
 <script>
     export default {
-        computed: {
-            authUrl() {
-                return 'https://accounts.spotify.com/authorize?'
+        methods: {
+            auth() {
+                window.location = 'https://accounts.spotify.com/authorize?'
                     + 'client_id=' + process.env.VUE_APP_SPOTIFY_CLIENT_ID
                     + '&response_type=code'
                     + '&redirect_uri=' + encodeURI(process.env.VUE_APP_SPOTIFY_CALLBACK_URI)
                     + '&scope=' + encodeURI(process.env.VUE_APP_SPOTIFY_SCOPE)
                     + '&state=' + process.env.VUE_APP_SPOTIFY_STATE;
-            },
-        },
-        methods: {
-            auth() {
-                window.location = this.authUrl;
             },
         }
     }

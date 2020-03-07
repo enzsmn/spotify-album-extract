@@ -70,7 +70,7 @@
 
 <script>
     import axios from 'axios';
-    import moment from 'moment';
+    import SpotifyService from '../services/SpotifyService';
 
     export default {
         data() {
@@ -84,17 +84,6 @@
             }
         },
         computed: {
-            authUrl() {
-                return 'https://accounts.spotify.com/authorize?'
-                    + 'client_id=' + process.env.VUE_APP_SPOTIFY_CLIENT_ID
-                    + '&response_type=code'
-                    + '&redirect_uri=' + encodeURI(process.env.VUE_APP_SPOTIFY_CALLBACK_URI)
-                    + '&scope=' + process.env.VUE_APP_SPOTIFY_SCOPE
-                    + '&state=' + process.env.VUE_APP_SPOTIFY_STATE;
-            },
-            cleanUrl() {
-                return process.env.VUE_APP_URL.replace('http://', '').replace('https://', '');
-            },
             selectedAlbums() {
                 return this.albums.filter(a => a.selected);
             },
@@ -123,15 +112,15 @@
             this.authorization.access_token = localStorage.getItem('spotify_access_token');
             this.authorization.user_id = localStorage.getItem('spotify_user_id');
 
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.authorization.access_token;
-            axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
-
             this.setupAxios();
 
             this.loadPlaylists();
         },
         methods: {
             setupAxios() {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.authorization.access_token;
+                axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
+
                 axios.interceptors.response.use(response => {
                     return response;
                 }, error => {
@@ -150,14 +139,9 @@
             },
             loadPlaylists() {
                 // Get user's playlists
-                axios.get('https://api.spotify.com/v1/me/playlists?limit=50')
-                    .then((res) => {
-                        // TODO: if res.data.total > 50, again with &offset=50
-
-                        console.log('Loaded playlists', res.data.items);
-
-                        this.playlists = res.data.items;
-                    });
+                SpotifyService.getPlaylists().then((items) => {
+                    this.playlists = items;
+                });
             },
             selectPlaylist(playlist) {
                 if (this.selectedPlaylist === playlist) {
@@ -167,18 +151,16 @@
                 this.selectedPlaylist = playlist;
 
                 // Get selected playlist's tracks
-                axios.get('https://api.spotify.com/v1/playlists/' + playlist.id + '/tracks')
-                    .then((res) => {
-                        console.log('Received playlist tracks', res.data.items);
+                SpotifyService.getPlaylistTracks(playlist.id).then((items) => {
+                    this.albums = [];
 
-                        this.albums = [];
-                        res.data.items.forEach((item) => {
-                            if (! this.albums.find(a => a.id === item.track.album.id)) {
-                                item.track.album.selected = true;
-                                this.albums.push(item.track.album);
-                            }
-                        });
+                    items.forEach((item) => {
+                        if (! this.albums.find(a => a.id === item.track.album.id)) {
+                            item.track.album.selected = true;
+                            this.albums.push(item.track.album);
+                        }
                     });
+                });
             },
             deselectPlaylist() {
                 this.selectedPlaylist = null;
@@ -215,12 +197,11 @@
                     // Get all tracks from each selected album
                     this.selectedAlbums.forEach(album => {
                         promises.push(
-                            axios.get('https://api.spotify.com/v1/albums/' + album.id + '/tracks')
-                                .then((res) => {
-                                    res.data.items.forEach((item) => {
-                                        tracks.push(item.uri);
-                                    });
-                                }),
+                            SpotifyService.getAlbumTracks(album.id).then((items) => {
+                                items.forEach((item) => {
+                                    tracks.push(item.uri);
+                                });
+                            }),
                         );
                     });
 
@@ -234,14 +215,10 @@
                 });
             },
             createPlaylist() {
-                return axios.post('https://api.spotify.com/v1/users/' + localStorage.getItem('spotify_user_id') + '/playlists', {
-                    name: `${this.selectedPlaylist.name} – Albums`,
-                    public: false,
-                    description: `Albums extracted from “${this.selectedPlaylist.name}” on ${moment().format('YYYY-MM-DD')} with ${this.cleanUrl}`,
-                })
-                    .then((res) => {
-                        console.log('Created playlist', res);
-                        this.newPlaylistId = res.data.id;
+                return SpotifyService.createPlaylist(this.selectedPlaylist.name)
+                    .then((playlistId) => {
+                        console.log('Created playlist', playlistId);
+                        this.newPlaylistId = playlistId;
                     });
             },
             addTracksToNewPlaylist() {
@@ -252,9 +229,7 @@
 
                     this.tracksToAdd.forEach(chunk => {
                         promises.push(
-                            axios.post('https://api.spotify.com/v1/playlists/' + this.newPlaylistId + '/tracks', {
-                                uris: chunk,
-                            })
+                            SpotifyService.addTracksToPlaylist(this.newPlaylistId, chunk)
                                 .then((res) => {
                                     console.log('Added ' + chunk.length + ' tracks to playlist', res);
                                     count += chunk.length;
