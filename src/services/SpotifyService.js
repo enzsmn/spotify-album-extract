@@ -102,6 +102,31 @@ const getPlaylistTracks = (playlistId) => {
     });
 };
 
+const getAlbumsTracks = (albums) => {
+    let tracks = [];
+
+    return new Promise((resolve) => {
+        let promises = [];
+
+        albums.forEach(album => {
+            promises.push(
+                getAlbumTracks(album.id).then((items) => {
+                    items.forEach((item) => {
+                        tracks.push(item.uri);
+                    });
+                }),
+            );
+        });
+
+        Promise.all(promises).then(() => {
+            console.log('Found ' + tracks.length + ' tracks');
+            resolve();
+        });
+    }).then(() => {
+        return chunk(tracks, 100);
+    });
+};
+
 const getAlbumTracks = (albumId) => {
     return axios.get(`${ SPOTIFY_API }/albums/${ albumId }/tracks`)
         .then((res) => {
@@ -115,6 +140,7 @@ const createPlaylist = (name) => {
         public: false,
         description: `Albums extracted from “${ name }” on ${ moment().format('YYYY-MM-DD' )} with ${ CLEAN_URL }`,
     }).then((res) => {
+        console.log('Created playlist', res.data.id);
         return res.data.id;
     });
 };
@@ -157,6 +183,7 @@ export default {
     getUserId: getUserId,
     getPlaylists: getPlaylists,
     getPlaylistTracks: getPlaylistTracks,
+    getAlbumsTracks: getAlbumsTracks,
     getAlbumTracks: getAlbumTracks,
     createPlaylist: createPlaylist,
     addTracksToPlaylist: addTracksToPlaylist,

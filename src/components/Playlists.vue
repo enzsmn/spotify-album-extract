@@ -178,9 +178,9 @@
                 this.albums.forEach(album => album.selected = false);
             },
             save() {
-                this.extractSelectedAlbumsTracks().then(() => {
-                    this.createPlaylist().then(() => {
-                        this.addTracksToNewPlaylist().then(() => {
+                SpotifyService.getAlbumsTracks(this.selectedAlbums).then((tracksChunked) => {
+                    SpotifyService.createPlaylist(this.selectedPlaylist.name).then((playlistId) => {
+                        SpotifyService.addTracksToPlaylist(playlistId, tracksChunked).then(() => {
                             this.$buefy.snackbar.open({
                                 type: 'is-primary',
                                 message: 'Playlist created',
@@ -189,55 +189,6 @@
                         });
                     });
                 });
-            },
-            async extractSelectedAlbumsTracks() {
-                return new Promise((resolve) => {
-
-                    let promises = [];
-                    let tracks = [];
-
-                    // Get all tracks from each selected album
-                    this.selectedAlbums.forEach(album => {
-                        promises.push(
-                            SpotifyService.getAlbumTracks(album.id).then((items) => {
-                                items.forEach((item) => {
-                                    tracks.push(item.uri);
-                                });
-                            }),
-                        );
-                    });
-
-                    Promise.all(promises).then(() => {
-                        console.log('Found ' + tracks.length + ' tracks');
-                        this.tracksToAdd = this.chunk(tracks, 100);
-                        console.log('Chunked tracks', this.tracksToAdd);
-                        resolve();
-                    });
-
-                });
-            },
-            createPlaylist() {
-                return SpotifyService.createPlaylist(this.selectedPlaylist.name)
-                    .then((playlistId) => {
-                        console.log('Created playlist', playlistId);
-                        this.newPlaylistId = playlistId;
-                    });
-            },
-            addTracksToNewPlaylist() {
-                return SpotifyService.addTracksToPlaylist(this.newPlaylistId, this.tracksToAdd)
-                    .then(() => {
-                        console.log('Added all tracks to playlist');
-                    });
-            },
-            chunk(arr, size) {
-                let i, j, tmp, chunks = [];
-
-                for (i = 0, j = arr.length; i < j; i += size) {
-                    tmp = arr.slice(i , i + size);
-                    chunks.push(tmp);
-                }
-
-                return chunks
             },
             logout() {
                 this.authorization = {};
