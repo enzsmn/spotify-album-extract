@@ -253,10 +253,11 @@ a {
 .copyright {
   position: fixed;
   right: 10px;
-  bottom: 65px;
+  bottom: 5px;
 
   @media (max-width: 1000px) {
     right: unset;
+    bottom: 65px;
     left: 50%;
     transform: translateX(-50%);
     z-index: -1;
