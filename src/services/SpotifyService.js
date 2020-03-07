@@ -45,12 +45,32 @@ const getUserId = (accessToken) => {
 };
 
 const getPlaylists = () => {
-    return axios.get(`${ SPOTIFY_API }/me/playlists?limit=50`)
-        .then((res) => {
-            // TODO: if res.data.total > 50, again with &offset=50
-            console.log('Loaded playlists', res.data.items);
-            return res.data.items;
-        });
+   let playlists = [];
+   let offset = 0;
+
+   return new Promise((resolve) => {
+       const cb = () => {
+           axios.get(`${SPOTIFY_API}/me/playlists?limit=50&offset=${ offset }`)
+               .then((res) => {
+                   console.log('Loaded playlists', res.data.items);
+                   playlists.push(...res.data.items);
+                   offset += res.data.items.length;
+
+                   if (res.data.total > offset) {
+                       if (offset % 0 === 0) {
+                           setTimeout(cb, 1000);
+                       } else {
+                           cb();
+                       }
+                   } else {
+                       resolve();
+                   }
+               });
+       };
+       cb();
+   }).then(() => {
+       return playlists;
+   });
 };
 
 const getPlaylistTracks = (playlistId) => {
