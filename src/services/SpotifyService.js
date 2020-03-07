@@ -74,11 +74,32 @@ const getPlaylists = () => {
 };
 
 const getPlaylistTracks = (playlistId) => {
-    return axios.get(`${ SPOTIFY_API }/playlists/${ playlistId }/tracks`)
-        .then((res) => {
-            console.log('Received playlist tracks', res.data.items);
-            return res.data.items;
-        });
+    let tracks = [];
+    let offset = 0;
+
+    return new Promise((resolve) => {
+        const cb = () => {
+            axios.get(`${SPOTIFY_API}/playlists/${ playlistId }/tracks?limit=100&offset=${ offset }`)
+                .then((res) => {
+                    console.log('Received playlist tracks', res.data.items);
+                    tracks.push(...res.data.items);
+                    offset += res.data.items.length;
+
+                    if (res.data.total > offset) {
+                        if (offset % 1000 === 0) {
+                            setTimeout(cb, 1000);
+                        } else {
+                            cb();
+                        }
+                    } else {
+                        resolve();
+                    }
+                });
+        };
+        cb();
+    }).then(() => {
+        return tracks;
+    });
 };
 
 const getAlbumTracks = (albumId) => {
