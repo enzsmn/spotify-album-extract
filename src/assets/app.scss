@@ -217,11 +217,13 @@ a {
   }
 }
 
-@media (max-width: 1000px) {
-  .playlist-selected {
+.playlist-selected {
+  .item.selected {
     .button.button-clear {
       display: block;
     }
+  }
+  @media (max-width: 1000px) {
     .item:not(.selected) {
       display: none;
     }
