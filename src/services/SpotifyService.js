@@ -128,10 +128,32 @@ const getAlbumsTracks = (albums) => {
 };
 
 const getAlbumTracks = (albumId) => {
-    return axios.get(`${ SPOTIFY_API }/albums/${ albumId }/tracks`)
-        .then((res) => {
-            return res.data.items;
-        });
+    let tracks = [];
+    let offset = 0;
+
+    return new Promise((resolve) => {
+        const cb = () => {
+            axios.get(`${ SPOTIFY_API }/albums/${ albumId }/tracks?limit=50&offset=${ offset }`)
+                .then((res) => {
+                    console.log('Loaded album tracks', res.data.items);
+                    tracks.push(...res.data.items);
+                    offset += res.data.items.length;
+
+                    if (res.data.total > offset) {
+                        if (offset % 200 === 0) {
+                            setTimeout(cb, 1000);
+                        } else {
+                            cb();
+                        }
+                    } else {
+                        resolve();
+                    }
+                });
+        };
+        cb();
+    }).then(() => {
+        return tracks;
+    });
 };
 
 const createPlaylist = (name) => {
