@@ -72,6 +72,7 @@
 
 <script>
     import axios from 'axios';
+    import lscache from 'lscache';
     import SpotifyService from '../services/SpotifyService';
 
     export default {
@@ -109,10 +110,10 @@
             },
         },
         mounted() {
-            this.authorization.code = localStorage.getItem('spotify_auth_code');
-            this.authorization.refresh_token = localStorage.getItem('spotify_refresh_token');
-            this.authorization.access_token = localStorage.getItem('spotify_access_token');
-            this.authorization.user_id = localStorage.getItem('spotify_user_id');
+            this.authorization.code = lscache.get('spotify_auth_code');
+            this.authorization.refresh_token = lscache.get('spotify_refresh_token');
+            this.authorization.access_token = lscache.get('spotify_access_token');
+            this.authorization.user_id = lscache.get('spotify_user_id');
 
             this.setupAxios();
 
@@ -193,12 +194,11 @@
             logout() {
                 this.authorization = {};
 
-                localStorage.removeItem('spotify_auth_code');
-                localStorage.removeItem('spotify_refresh_token');
-                localStorage.removeItem('spotify_access_token');
-                localStorage.removeItem('spotify_user_id');
-                localStorage.removeItem('spotify_expires');
-                localStorage.removeItem('spotify_auth_state');
+                lscache.remove('spotify_auth_code');
+                lscache.remove('spotify_auth_state');
+                lscache.remove('spotify_access_token');
+                lscache.remove('spotify_refresh_token');
+                lscache.remove('spotify_user_id');
 
                 this.$router.push({ name: 'Home' });
             },

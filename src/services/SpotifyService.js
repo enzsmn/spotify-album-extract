@@ -1,4 +1,5 @@
 import axios from 'axios';
+import lscache from 'lscache';
 import moment from 'moment';
 
 const SPOTIFY_AUTH = 'https://accounts.spotify.com/api';
@@ -23,9 +24,8 @@ const getToken = (code) => {
         .then((res) => {
             console.log('Received token', res.data);
 
-            localStorage.setItem('spotify_access_token', res.data.access_token);
-            localStorage.setItem('spotify_refresh_token', res.data.refresh_token);
-            localStorage.setItem('spotify_expires', moment().add('1', 'hour'));
+            lscache.set('spotify_access_token', res.data.access_token, res.data.expires_in / 60);
+            lscache.set('spotify_refresh_token', res.data.refresh_token);
 
             return getUserId(res.data.access_token);
         });
@@ -40,7 +40,7 @@ const getUserId = (accessToken) => {
     })
         .then((res) => {
             console.log('Received user ID', res);
-            localStorage.setItem('spotify_user_id', res.data.id);
+            lscache.set('spotify_user_id', res.data.id);
         });
 };
 
@@ -157,7 +157,7 @@ const getAlbumTracks = (albumId) => {
 };
 
 const createPlaylist = (name) => {
-    return axios.post(`${ SPOTIFY_API }/users/${ localStorage.getItem('spotify_user_id') }/playlists`, {
+    return axios.post(`${ SPOTIFY_API }/users/${ lscache.get('spotify_user_id') }/playlists`, {
         name: `${ name } – Albums`,
         public: false,
         description: `Albums extracted from “${ name }” on ${ moment().format('YYYY-MM-DD' )} with ${ CLEAN_URL }`,
