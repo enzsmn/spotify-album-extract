@@ -17,7 +17,6 @@ const getToken = (code) => {
         {
             headers: {
                 'Authorization': 'Basic ' + btoa(process.env.VUE_APP_SPOTIFY_CLIENT_ID + ':' + process.env.VUE_APP_SPOTIFY_CLIENT_SECRET),
-                'Content-Type': 'application/x-www-form-urlencoded',
             }
         }
     )
@@ -35,7 +34,6 @@ const getUserId = (accessToken) => {
     return axios.get(`${ SPOTIFY_API }/me`, {
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/x-www-form-urlencoded',
         }
     })
         .then((res) => {
