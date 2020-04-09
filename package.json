@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "index": "echo 'User-agent: *\nDisallow:' > dist/robots.txt",
+    "no-index": "echo 'User-agent: *\nDisallow: /' > dist/robots.txt"
   },
   "dependencies": {
     "axios": "^0.19.1",
