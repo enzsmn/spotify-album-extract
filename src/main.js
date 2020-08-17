@@ -1,3 +1,5 @@
+import Bugsnag from '@bugsnag/js';
+import BugsnagPluginVue from '@bugsnag/plugin-vue';
 import Vue from 'vue';
 import App from './App.vue';
 import Buefy from 'buefy';
@@ -10,6 +12,18 @@ Vue.config.productionTip = false;
 
 Vue.use(Buefy);
 Vue.use(VueRouter);
+
+Bugsnag.start({
+    apiKey: process.env.VUE_APP_BUGSNAG_API_KEY,
+    plugins: [new BugsnagPluginVue()],
+    // onError: function (event) {
+    //     event.addMetadata('foo', {
+    //         lorem: 'ipsum',
+    //     })
+    // }
+});
+
+Bugsnag.getPlugin('vue').installVueErrorHandler(Vue);
 
 const routes = [
     {name: 'Home', path: '/', component: Home},

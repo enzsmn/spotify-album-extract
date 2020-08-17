@@ -10,6 +10,8 @@
     "no-index": "echo 'User-agent: *\nDisallow: /' > dist/robots.txt"
   },
   "dependencies": {
+    "@bugsnag/js": "^7.3.0",
+    "@bugsnag/plugin-vue": "^7.3.0",
     "axios": "^0.19.1",
     "buefy": "^0.8.10",
     "core-js": "^3.4.4",
