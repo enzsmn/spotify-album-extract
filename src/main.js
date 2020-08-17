@@ -26,8 +26,6 @@ Bugsnag.start({
 
 Bugsnag.getPlugin('vue').installVueErrorHandler(Vue);
 
-Bugsnag.notify(new Error('Test error'));
-
 const routes = [
     {name: 'Home', path: '/', component: Home},
     {name: 'Callback', path: '/callback', component: Callback},
