@@ -23,8 +23,16 @@
                     <h2 class="muted">Select playlist</h2>
                     <p class="muted small">Found {{ playlists.length }} playlists</p>
                 </div>
+                <b-field v-if="!selectedPlaylist">
+                    <b-input
+                        v-model="filter"
+                        type="search"
+                        placeholder="Search..."
+                    >
+                    </b-input>
+                </b-field>
                 <a
-                    v-for="playlist in playlists"
+                    v-for="playlist in filteredPlaylists"
                     :key="playlist.id"
                     class="item"
                     :class="{ 'selected': playlist === selectedPlaylist }"
@@ -80,6 +88,7 @@
             return {
                 authorization: {},
                 playlists: [],
+                filter: null,
                 albums: [],
                 selectedPlaylist: null,
                 tracksToAdd: [],
@@ -87,6 +96,14 @@
             }
         },
         computed: {
+            filteredPlaylists() {
+                const filterCleaned = (this.filter && this.filter.trim()) ? this.filter.trim() : null;
+                if (filterCleaned) {
+                    return this.playlists.filter(p => p.name.toLowerCase().includes(filterCleaned.toLowerCase()));
+                }
+
+                return this.playlists;
+            },
             selectedAlbums() {
                 return this.albums.filter(a => a.selected);
             },

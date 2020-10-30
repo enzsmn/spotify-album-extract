@@ -94,6 +94,19 @@ a {
   }
 }
 
+input[type=search] {
+  background: rgb(35, 38, 42);
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid rgb(90, 94, 100);
+  color: #fff;
+  &::-webkit-input-placeholder,
+  &::-ms-input-placeholder,
+  &::placeholder {
+    color: rgb(90, 94, 100) !important;
+  }
+}
+
 .button {
   font-family: 'Varela Round', sans-serif;
   margin-bottom: 0 !important;
