@@ -99,11 +99,17 @@ input[type=search] {
   border: none;
   border-radius: 0;
   border-bottom: 1px solid rgb(90, 94, 100);
+  box-shadow: none;
   color: #fff;
+  padding: 0;
+  transition: .3s ease;
   &::-webkit-input-placeholder,
   &::-ms-input-placeholder,
   &::placeholder {
     color: rgb(90, 94, 100) !important;
+  }
+  &:focus {
+    padding: 0 8px;
   }
 }
 
