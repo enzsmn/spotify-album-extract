@@ -48,7 +48,7 @@ const getPlaylists = () => {
 
    return new Promise((resolve) => {
        const cb = () => {
-           axios.get(`${SPOTIFY_API}/me/playlists?limit=50&offset=${ offset }`)
+           axios.get(`${ SPOTIFY_API }/me/playlists?limit=50&offset=${ offset }`)
                .then((res) => {
                    console.log('Loaded playlists', res.data.items);
                    playlists.push(...res.data.items);
@@ -77,7 +77,7 @@ const getPlaylistTracks = (playlistId) => {
 
     return new Promise((resolve) => {
         const cb = () => {
-            axios.get(`${SPOTIFY_API}/playlists/${ playlistId }/tracks?limit=100&offset=${ offset }`)
+            axios.get(`${ SPOTIFY_API }/playlists/${ playlistId }/tracks?limit=100&offset=${ offset }`)
                 .then((res) => {
                     console.log('Received playlist tracks', res.data.items);
                     tracks.push(...res.data.items);
