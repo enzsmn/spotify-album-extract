@@ -80,7 +80,11 @@ const getPlaylistTracks = (playlistId) => {
             axios.get(`${ SPOTIFY_API }/playlists/${ playlistId }/tracks?limit=100&offset=${ offset }`)
                 .then((res) => {
                     console.log('Received playlist tracks', res.data.items);
-                    tracks.push(...res.data.items);
+
+                    const tracksWithAlbums = res.data.items.filter(item => item.track.album.id);
+                    console.log('Filtered out tracks without albums', tracksWithAlbums);
+                    tracks.push(...tracksWithAlbums);
+
                     offset += res.data.items.length;
 
                     if (res.data.total > offset) {
