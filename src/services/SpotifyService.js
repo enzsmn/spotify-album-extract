@@ -81,7 +81,7 @@ const getPlaylistTracks = (playlistId) => {
                 .then((res) => {
                     console.log('Received playlist tracks', res.data.items);
 
-                    const tracksWithAlbums = res.data.items.filter(item => item.track.album.id);
+                    const tracksWithAlbums = res.data.items.filter(item => item.track && item.track.album.id);
                     console.log('Filtered out tracks without albums', tracksWithAlbums);
                     tracks.push(...tracksWithAlbums);
 
