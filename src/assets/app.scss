@@ -32,6 +32,12 @@ html, body {
   }
 }
 
+body {
+  animation: fadeInAnimation ease-out .5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -289,4 +295,13 @@ input[type=search] {
   position: fixed;
   top: 5px;
   right: 10px;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
