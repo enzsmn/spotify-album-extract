@@ -128,7 +128,6 @@
         },
         mounted() {
             this.authorization.code = lscache.get('spotify_auth_code');
-            this.authorization.refresh_token = lscache.get('spotify_refresh_token');
             this.authorization.access_token = lscache.get('spotify_access_token');
             this.authorization.user_id = lscache.get('spotify_user_id');
 
@@ -214,7 +213,6 @@
                 lscache.remove('spotify_auth_code');
                 lscache.remove('spotify_auth_state');
                 lscache.remove('spotify_access_token');
-                lscache.remove('spotify_refresh_token');
                 lscache.remove('spotify_user_id');
 
                 this.$router.push({ name: 'Home' });

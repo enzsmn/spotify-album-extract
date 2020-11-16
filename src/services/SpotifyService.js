@@ -24,7 +24,6 @@ const getToken = (code) => {
             console.log('Received token', res.data);
 
             lscache.set('spotify_access_token', res.data.access_token, res.data.expires_in / 60);
-            lscache.set('spotify_refresh_token', res.data.refresh_token);
 
             return getUserId(res.data.access_token);
         });
