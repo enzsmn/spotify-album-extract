@@ -107,7 +107,7 @@ input[type=search] {
   border-bottom: 1px solid rgb(90, 94, 100);
   box-shadow: none;
   color: #fff;
-  font-size: 16px;
+  font-size: 16px; // Prevent iOS zoom bug
   padding: 0;
   transition: .3s ease;
   &::-webkit-input-placeholder,
