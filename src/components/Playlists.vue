@@ -195,9 +195,13 @@
                 this.albums.forEach(album => album.selected = false);
             },
             save() {
+                window.pa.track({name: 'Save'});
                 SpotifyService.getAlbumsTracks(this.selectedAlbums).then((tracksChunked) => {
                     SpotifyService.createPlaylist(this.selectedPlaylist.name).then((playlistId) => {
                         SpotifyService.addTracksToPlaylist(playlistId, tracksChunked).then(() => {
+                            const tracksCount = tracksChunked.reduce((count, row) => count + row.length, 0);
+                            window.pa.track({name: 'Saved', tracks: tracksCount});
+
                             this.$buefy.snackbar.open({
                                 type: 'is-primary',
                                 message: 'Playlist created',
