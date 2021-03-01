@@ -14,7 +14,7 @@
     export default {
         methods: {
             auth() {
-                window.pa.track({name: 'Authorize'});
+                window.pa.track({ name: 'Authorize' });
                 window.location = 'https://accounts.spotify.com/authorize?'
                     + 'client_id=' + process.env.VUE_APP_SPOTIFY_CLIENT_ID
                     + '&response_type=code'
