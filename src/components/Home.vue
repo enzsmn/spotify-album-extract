@@ -19,8 +19,7 @@
                     + 'client_id=' + process.env.VUE_APP_SPOTIFY_CLIENT_ID
                     + '&response_type=code'
                     + '&redirect_uri=' + encodeURI(process.env.VUE_APP_SPOTIFY_CALLBACK_URI)
-                    + '&scope=' + encodeURI('playlist-read-private playlist-read-collaborative playlist-modify-private')
-                    + '&state=' + process.env.VUE_APP_SPOTIFY_STATE;
+                    + '&scope=' + encodeURI('playlist-read-private playlist-read-collaborative playlist-modify-private');
             },
         }
     }

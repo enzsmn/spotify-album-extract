@@ -215,7 +215,6 @@
                 this.authorization = {};
 
                 lscache.remove('spotify_auth_code');
-                lscache.remove('spotify_auth_state');
                 lscache.remove('spotify_access_token');
                 lscache.remove('spotify_user_id');
 
