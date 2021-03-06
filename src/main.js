@@ -31,7 +31,7 @@ const routes = [
     {name: 'Home', path: '/', component: Home},
     {name: 'Callback', path: '/callback', component: Callback},
     {name: 'Playlists', path: '/playlists', component: Playlists},
-    {name: '404', path: '/404', component: NotFound},
+    {name: '404', path: '/*', component: NotFound},
 ];
 
 const router = new VueRouter({
