@@ -29,9 +29,9 @@ Bugsnag.getPlugin('vue').installVueErrorHandler(Vue);
 
 const routes = [
     {name: 'Home', path: '/', component: Home},
-    {name: 'Callback', path: '/callback', component: Callback},
-    {name: 'Playlists', path: '/playlists', component: Playlists},
-    {name: '404', path: '/*', component: NotFound},
+    {name: 'Callback', path: 'callback', component: Callback},
+    {name: 'Playlists', path: 'playlists', component: Playlists},
+    {name: '404', path: '*', component: NotFound},
 ];
 
 const router = new VueRouter({
