@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 import Home from './components/Home';
 import Callback from './components/Callback';
 import Playlists from './components/Playlists';
+import NotFound from './components/NotFound';
 
 Vue.config.productionTip = false;
 
@@ -30,6 +31,7 @@ const routes = [
     {name: 'Home', path: '/', component: Home},
     {name: 'Callback', path: '/callback', component: Callback},
     {name: 'Playlists', path: '/playlists', component: Playlists},
+    {name: '404', path: '/404', component: NotFound},
 ];
 
 const router = new VueRouter({
