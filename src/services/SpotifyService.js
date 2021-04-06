@@ -169,7 +169,7 @@ const createPlaylist = (name) => {
 };
 
 const addTracksToPlaylist = (playlistId, tracks) => {
-    const chunks = [...chunk(tracks, 100)[0]];
+    const chunks = [...chunk(tracks, 100)[0]]; // TODO: Support more than 100 tracks per album
 
     return new Promise((resolve) => {
         let promises = [];
@@ -194,7 +194,7 @@ const chunk = (arr, size) => {
     let i, j, tmp, chunks = [];
 
     for (i = 0, j = arr.length; i < j; i += size) {
-        tmp = arr.slice(i , i + size);
+        tmp = arr.slice(i, i + size);
         chunks.push(tmp);
     }
 
