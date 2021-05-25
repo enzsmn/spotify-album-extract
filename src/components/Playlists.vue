@@ -50,7 +50,13 @@
             <div v-if="selectedPlaylist && albums.length > 0" class="panel albums">
                 <div class="panel-title">
                     <h2 class="muted">Select albums</h2>
-                    <p class="muted small">{{ selectedAlbums.length }}/{{ albums.length }} albums selected, {{ selectedAlbumsTracksCount }} tracks in total</p>
+                    <p class="muted small">
+                      Selected
+                      <span v-if="selectedAlbumsTracksCount > 0">
+                        {{ selectedAlbumsTracksCount }} tracks in
+                      </span>
+                      {{ selectedAlbums.length }} albums
+                    </p>
                 </div>
                 <div class="select-buttons">
                     <b-button type="is-primary is-rounded is-outlined" @click="selectedAllAlbums">Select all</b-button>
