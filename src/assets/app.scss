@@ -245,15 +245,18 @@ input[type=search] {
 }
 
 .playlist-selected {
+  align-self: flex-start;
+  height: auto;
+
   .item.selected {
+    cursor: default;
+
     .button.button-clear {
       display: block;
     }
   }
-  @media (max-width: 1000px) {
-    .item:not(.selected) {
-      display: none;
-    }
+  .item:not(.selected) {
+    display: none;
   }
 }
 
