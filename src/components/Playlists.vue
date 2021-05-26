@@ -229,6 +229,8 @@
                 lscache.remove('spotify_access_token');
                 lscache.remove('spotify_user_id');
 
+                window.pa.track({ name: 'Logout' });
+
                 this.$router.push({ name: 'Home' });
             },
         }
