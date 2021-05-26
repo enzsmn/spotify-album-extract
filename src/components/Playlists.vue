@@ -41,7 +41,12 @@
                     <img :src="playlist.images.length ? playlist.images[0].url : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC'">
                     <h3 class="item-title">
                         <span>{{ playlist.name }}</span><br/>
-                        <span class="small muted">{{ playlist.tracks.total }} {{ playlist.tracks.total > 1 ? 'tracks' : 'track' }}</span>
+                        <span v-if="playlist.owner.id !== authorization.user_id" class="muted">
+                          {{ playlist.owner.display_name }}
+                        </span>
+                        <span class="small muted">
+                          {{ playlist.tracks.total }} {{ playlist.tracks.total > 1 ? 'tracks' : 'track' }}
+                        </span>
                     </h3>
                     <b-button type="is-primary is-rounded is-outlined" class="button-clear" @click.stop="deselectPlaylist">&times;</b-button>
                 </a>
