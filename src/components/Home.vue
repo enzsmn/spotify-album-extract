@@ -3,7 +3,7 @@
 
         <h1>Spotify <span>album extract</span></h1>
 
-        <p>This tool allows you to put the full albums from a selected playlist's tracks into a new playlist.</p>
+        <p>This tool lets you select a playlist and will put each track's full album into a new playlist.</p>
 
         <b-button type="is-primary is-rounded" @click="auth">Authorize and load playlists</b-button>
 
