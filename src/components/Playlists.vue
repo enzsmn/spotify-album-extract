@@ -64,8 +64,8 @@
                     </p>
                 </div>
                 <div class="select-buttons">
-                    <b-button type="is-primary is-rounded is-outlined" @click="selectedAllAlbums">Select all</b-button>
-                    <b-button type="is-primary is-rounded is-outlined" @click="deselectedAllAlbums">Deselect all</b-button>
+                    <b-button type="is-primary is-rounded is-outlined is-small" @click="selectedAllAlbums">Select all</b-button>
+                    <b-button type="is-primary is-rounded is-outlined is-small" @click="deselectedAllAlbums">Deselect all</b-button>
                 </div>
                 <a
                     v-for="album in albums"
@@ -76,8 +76,8 @@
                 >
                     <img :src="album.images.length ? album.images[0].url : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC'">
                     <h3 class="item-title">
-                        <span>{{ album.name }}</span><br>
-                        <span class="muted">{{ album.artists.map(a => a.name).join(', ') }}</span><br/>
+                        <strong>{{ album.name }}</strong><br>
+                        <span>{{ album.artists.map(a => a.name).join(', ') }}</span><br/>
                         <span class="small muted">{{ album.total_tracks }} {{ album.total_tracks > 1 ? 'tracks' : 'track' }}</span>
                     </h3>
                     <b-checkbox v-model="album.selected" disabled />

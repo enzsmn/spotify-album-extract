@@ -183,7 +183,9 @@ input[type=search] {
     flex: 0 0 90%;
     margin-bottom: 10px;
     &.albums {
-      margin-bottom: 90px;
+      .item:last-of-type {
+        margin-bottom: 50px;
+      }
     }
   }
 }
@@ -199,6 +201,7 @@ input[type=search] {
   padding: 10px 10px;
   transition: .3s ease;
   img {
+    background: rgba(90, 94, 100, 0.1);
     border-radius: 3px;
     object-fit: cover;
     object-position: center;
@@ -301,6 +304,11 @@ input[type=search] {
   position: fixed;
   top: 5px;
   right: 10px;
+
+  @media (max-width: 1000px) {
+    top: 10px;
+    right: 20px;
+  }
 }
 
 @keyframes fadeInAnimation {
