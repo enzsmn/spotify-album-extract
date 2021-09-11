@@ -8,6 +8,11 @@
 
     export default {
         mounted() {
+            if (! this.$route.query.code) {
+                this.$router.push({ name: 'Home' });
+                return;
+            }
+
             console.log('Callback', this.$route.query);
 
             const expiration = this.$route.query.code / 60;
