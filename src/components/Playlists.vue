@@ -142,6 +142,11 @@
             this.authorization.access_token = lscache.get('spotify_access_token');
             this.authorization.user_id = lscache.get('spotify_user_id');
 
+            if (! this.authorization.code || ! this.authorization.access_token || ! this.authorization.user_id) {
+                this.$router.push({ name: 'Home' });
+                return;
+            }
+
             this.setupAxios();
 
             this.loadPlaylists();
