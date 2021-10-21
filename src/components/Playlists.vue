@@ -93,6 +93,7 @@
     import axios from 'axios';
     import lscache from 'lscache';
     import SpotifyService from '../services/SpotifyService';
+    import Bugsnag from '@bugsnag/js';
 
     export default {
         data() {
@@ -182,6 +183,10 @@
                 if (this.selectedPlaylist === playlist) {
                     return false;
                 }
+
+                Bugsnag.leaveBreadcrumb('Selected playlist', {
+                    tracks: playlist.tracks.total,
+                });
 
                 this.selectedPlaylist = playlist;
 
