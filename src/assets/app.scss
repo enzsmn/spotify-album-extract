@@ -55,12 +55,15 @@ body {
       font-size: 3em;
       margin-bottom: 30px;
     }
+
     .button {
       margin-top: 40px;
     }
+
     & + .copyright {
       bottom: 10px;
     }
+
     @media (max-width: 1000px) {
       h1 {
         font-size: 1.6em;
@@ -80,12 +83,15 @@ body {
 h1 {
   font-size: 1.6em;
   font-weight: lighter;
+
   span {
     font-weight: bold;
   }
+
   a {
     color: #fff;
   }
+
   @media (max-width: 1000px) {
     text-align: center;
   }
@@ -111,11 +117,13 @@ input[type=search] {
   font-size: 16px; // Prevent iOS zoom bug
   padding: 0;
   transition: .3s ease;
+
   &::-webkit-input-placeholder,
   &::-ms-input-placeholder,
   &::placeholder {
     color: rgb(90, 94, 100) !important;
   }
+
   &:focus {
     padding: 0 8px;
   }
@@ -125,6 +133,7 @@ input[type=search] {
   font-family: 'Varela Round', sans-serif;
   margin-bottom: 0 !important;
   transition-duration: .2s;
+
   &.button-clear {
     display: none;
     flex-shrink: 0;
@@ -132,6 +141,7 @@ input[type=search] {
     width: 32px;
     height: 32px;
   }
+
   @media (max-width: 1000px) {
     &.button-save-playlist {
       position: fixed;
@@ -176,9 +186,11 @@ input[type=search] {
   overflow-y: scroll;
   padding: 20px 20px 10px;
   position: relative;
+
   .panel-title {
     margin-bottom: 15px;
   }
+
   @media (max-width: 1000px) {
     flex: 0 0 90%;
     margin-bottom: 10px;
@@ -200,6 +212,7 @@ input[type=search] {
   margin-left: -10px;
   padding: 10px 10px;
   transition: .3s ease;
+
   img {
     background: rgba(90, 94, 100, 0.1);
     border-radius: 3px;
@@ -208,27 +221,32 @@ input[type=search] {
     width: 80px;
     height: 80px;
   }
+
   .item-title {
     flex-grow: 1;
     margin-right: 20px;
     margin-left: 20px;
     overflow-x: hidden;
+
     span {
       display: inline-block;
       overflow-x: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
+
       &.small {
         margin-top: -2px;
       }
     }
   }
+
   &:hover, &.selected {
     background: rgb(34, 36, 38);
     box-shadow: 0 10px 20px rgb(28, 30, 32);
     color: #fff;
   }
+
   @media (max-width: 1000px) {
     margin-top: 0;
     padding-right: 5px;
@@ -259,6 +277,7 @@ input[type=search] {
       display: block;
     }
   }
+
   .item:not(.selected) {
     display: none;
   }
@@ -272,6 +291,7 @@ input[type=search] {
   .button + .button {
     margin-left: 8px;
   }
+
   @media (max-width: 1000px) {
     position: relative;
     top: unset;
