@@ -36,11 +36,11 @@ body {
   animation: fadeInAnimation ease-out .5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   margin: 20px auto;
 }
 

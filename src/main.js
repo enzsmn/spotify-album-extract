@@ -19,11 +19,6 @@ Bugsnag.start({
   enabledReleaseStages: ["production"],
   plugins: [new BugsnagPluginVue()],
   releaseStage: process.env.NODE_ENV
-  // onError: function (event) {
-  //     event.addMetadata('foo', {
-  //         lorem: 'ipsum',
-  //     })
-  // }
 });
 
 Bugsnag.getPlugin("vue").installVueErrorHandler(Vue);
