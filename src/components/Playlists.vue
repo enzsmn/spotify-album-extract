@@ -157,9 +157,7 @@
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.authorization.access_token;
                 axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
 
-                axios.interceptors.response.use(response => {
-                    return response;
-                }, error => {
+                axios.interceptors.response.use(response => response, error => {
                     this.$buefy.snackbar.open({
                         type: 'is-primary',
                         message: 'Something went wrong',
