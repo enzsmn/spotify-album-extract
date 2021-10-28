@@ -216,7 +216,12 @@
                 this.albums.forEach(album => album.selected = false);
             },
             save() {
+                Bugsnag.leaveBreadcrumb('Save', {
+                  tracks: this.selectedAlbums.length,
+                });
+
                 window.pa.track({ name: 'Save' });
+
                 SpotifyService.getAlbumsTracks(this.selectedAlbums).then((tracksChunked) => {
                     SpotifyService.createPlaylist(this.selectedPlaylist.name).then((playlistId) => {
                         SpotifyService.addTracksToPlaylist(playlistId, tracksChunked).then(() => {
