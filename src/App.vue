@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="container">
     <router-view></router-view>
-    <a href="https://nozem.space" target="_blank" class="copyright muted small"
-      >&copy; {{ year }} nozem</a
-    >
+    <a href="https://nozem.space" target="_blank" class="copyright muted small">
+      &copy; {{ year }} nozem
+    </a>
   </div>
 </template>
 
