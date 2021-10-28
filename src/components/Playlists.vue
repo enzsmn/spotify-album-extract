@@ -41,7 +41,7 @@
                     <img :src="playlist.images.length ? playlist.images[0].url : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC'">
                     <h3 class="item-title">
                         <span>{{ playlist.name }}</span><br/>
-                        <span v-if="playlist.owner.id !== authorization.user_id" class="muted">
+                        <span v-if="userId && userId !== playlist.owner.id" class="muted">
                           {{ playlist.owner.display_name }}
                         </span>
                         <span class="small muted">
@@ -98,7 +98,7 @@
     export default {
         data() {
             return {
-                authorization: {},
+                userId: null,
                 playlists: [],
                 filter: null,
                 albums: [],
@@ -139,24 +139,22 @@
             },
         },
         mounted() {
-            this.authorization.code = lscache.get('spotify_auth_code');
-            this.authorization.access_token = lscache.get('spotify_access_token');
-            this.authorization.user_id = lscache.get('spotify_user_id');
-
-            Bugsnag.setUser(this.authorization.user_id);
-
-            if (! this.authorization.code || ! this.authorization.access_token || ! this.authorization.user_id) {
+            if (! lscache.get('spotify_auth_code')) {
                 this.$router.push({ name: 'Home' });
                 return;
             }
 
             this.setupAxios();
 
+            SpotifyService.getUserId().then(() => {
+                this.userId = lscache.get('spotify_user_id');
+            });
+
             this.loadPlaylists();
         },
         methods: {
             setupAxios() {
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.authorization.access_token;
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + lscache.get('spotify_auth_code');
                 axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
 
                 axios.interceptors.response.use(response => response, error => {
@@ -235,10 +233,7 @@
                 });
             },
             logout() {
-                this.authorization = {};
-
                 lscache.remove('spotify_auth_code');
-                lscache.remove('spotify_access_token');
                 lscache.remove('spotify_user_id');
 
                 window.pa.track({ name: 'Logout' });

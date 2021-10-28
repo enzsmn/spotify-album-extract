@@ -17,7 +17,7 @@
                 window.pa.track({ name: 'Authorize' });
                 window.location = 'https://accounts.spotify.com/authorize?'
                     + 'client_id=' + process.env.VUE_APP_SPOTIFY_CLIENT_ID
-                    + '&response_type=code'
+                    + '&response_type=token'
                     + '&redirect_uri=' + encodeURI(process.env.VUE_APP_SPOTIFY_CALLBACK_URI)
                     + '&scope=' + encodeURI('playlist-read-private playlist-read-collaborative playlist-modify-private');
             },

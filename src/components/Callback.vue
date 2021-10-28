@@ -3,28 +3,22 @@
 </template>
 
 <script>
-    import SpotifyService from '../services/SpotifyService';
     import lscache from 'lscache';
 
     export default {
         mounted() {
-            if (! this.$route.query.code) {
-                this.$router.push({ name: 'Home' });
+            const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+
+            if (! parsedHash.get('access_token') || ! parsedHash.get('expires_in')) {
+                alert('Something went wrong');
+                this.$router.push({name: 'Home'});
                 return;
             }
 
-            console.log('Callback', this.$route.query);
+            const validity = parseInt(parsedHash.get('expires_in')) / 60;
+            lscache.set('spotify_auth_code', parsedHash.get('access_token'), validity);
 
-            lscache.set('spotify_auth_code', this.$route.query.code, 60);
-
-            this.getToken(this.$route.query.code);
+            this.$router.push({name: 'Playlists'});
         },
-        methods: {
-            getToken(code) {
-                SpotifyService.getToken(code).then(() => {
-                    this.$router.push({ name: 'Playlists' });
-                });
-            },
-        }
     }
 </script>

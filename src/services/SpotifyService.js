@@ -2,37 +2,13 @@ import axios from 'axios';
 import lscache from 'lscache';
 import moment from 'moment';
 
-const SPOTIFY_AUTH = 'https://accounts.spotify.com/api';
 const SPOTIFY_API = 'https://api.spotify.com/v1';
 const CLEAN_URL = process.env.VUE_APP_URL.replace('http://', '').replace('https://', '');
 
-const getToken = (code) => {
-    const params = new URLSearchParams();
-    params.append('grant_type', 'authorization_code');
-    params.append('code', code);
-    params.append('redirect_uri', encodeURI(process.env.VUE_APP_SPOTIFY_CALLBACK_URI));
-
-    return axios.post(`${ SPOTIFY_AUTH }/token`,
-        params,
-        {
-            headers: {
-                'Authorization': 'Basic ' + btoa(process.env.VUE_APP_SPOTIFY_CLIENT_ID + ':' + process.env.VUE_APP_SPOTIFY_CLIENT_SECRET),
-            }
-        }
-    )
-        .then((res) => {
-            console.log('Received token', res.data);
-
-            lscache.set('spotify_access_token', res.data.access_token, res.data.expires_in / 60);
-
-            return getUserId(res.data.access_token);
-        });
-};
-
-const getUserId = (accessToken) => {
+const getUserId = () => {
     return axios.get(`${ SPOTIFY_API }/me`, {
         headers: {
-            'Authorization': 'Bearer ' + accessToken,
+            'Authorization': 'Bearer ' + lscache.get('spotify_auth_code'),
         }
     })
         .then((res) => {
@@ -202,7 +178,6 @@ const chunk = (arr, size) => {
 };
 
 export default {
-    getToken: getToken,
     getUserId: getUserId,
     getPlaylists: getPlaylists,
     getPlaylistTracks: getPlaylistTracks,
