@@ -28,7 +28,12 @@
           <p class="muted small">Found {{ playlists.length }} playlists</p>
         </div>
         <b-field v-if="!selectedPlaylist">
-          <b-input v-model="filter" type="search" placeholder="Search...">
+          <b-input
+            v-model="filter"
+            type="search"
+            placeholder="Search..."
+            icon="magnify"
+          >
           </b-input>
         </b-field>
         <a
