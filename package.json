@@ -6,8 +6,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "index": "echo 'User-agent: *\nDisallow:' > dist/robots.txt",
-    "no-index": "echo 'User-agent: *\nDisallow: /' > dist/robots.txt",
     "remove-sourcemaps": "find dist/js -name '*.map' -type f -delete"
   },
   "dependencies": {
