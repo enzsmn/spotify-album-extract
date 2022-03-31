@@ -1,25 +1,25 @@
 <template>
-  <div id="app" class="container">
-    <router-view></router-view>
-    <a href="https://nozem.space" target="_blank" class="copyright muted small">
-      &copy; {{ year }} nozem
-    </a>
+  <div id="app" :class="pageClass">
+    <router-view />
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import moment from "moment";
+import Vue from "vue";
+import Footer from "./components/Footer";
+import SpotifyService from "./services/SpotifyService";
 
 export default {
   name: "App",
+  components: { Footer },
   computed: {
-    year() {
-      return moment().format("Y");
-    }
-  }
+    pageClass() {
+      return `page-${this.$route.name?.toLowerCase()}`;
+    },
+  },
+  created() {
+    Vue.prototype.$spotify = new SpotifyService();
+  },
 };
 </script>
-
-<style lang="sass">
-@import 'assets/app';
-</style>

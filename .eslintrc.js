@@ -1,11 +1,11 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   extends: ["plugin:vue/recommended", "eslint:recommended", "@vue/prettier"],
   parserOptions: {
-    parser: "babel-eslint"
+    parser: "babel-eslint",
   },
   plugins: ["simple-import-sort"],
   rules: {
@@ -16,8 +16,8 @@ module.exports = {
     "simple-import-sort/imports": [
       "warn",
       {
-        groups: [["^\\u0000", "^@?\\w", "^[^.]", "^\\."]]
-      }
-    ]
-  }
+        groups: [["^\\u0000", "^@?\\w", "^[^.]", "^\\."]],
+      },
+    ],
+  },
 };
