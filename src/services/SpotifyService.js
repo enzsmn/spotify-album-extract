@@ -95,6 +95,8 @@ export default class SpotifyService {
       .get(`${SPOTIFY_API}/me`)
       .then((response) => {
         this.userId = response.data.id;
+
+        Bugsnag.setUser(null, null, response.data.display_name);
       })
       .catch((error) => {
         Bugsnag.notify(error);
