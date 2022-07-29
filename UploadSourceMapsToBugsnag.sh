@@ -21,7 +21,7 @@ if [ -d ./dist/js ]; then
       # Upload to Bugsnag
       curl --location --request POST 'https://upload.bugsnag.com' \
         --form "apiKey=\"$VUE_APP_BUGSNAG_API_KEY\"" \
-        --form "minifiedUrl=\"http*://spotify-album-extract.com/js/app.*.js\"" \
+        --form "minifiedUrl=\"https://spotify-album-extract.com/js/app.*.js\"" \
         --form "overwrite=true" \
         --form "sourcemap=@\"$path\""
       echo "$(tput setaf 2)\nUploaded $file $(tput sgr 0)"
