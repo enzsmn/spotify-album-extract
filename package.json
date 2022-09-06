@@ -5,8 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "remove-sourcemaps": "find dist/js -name '*.map' -type f -delete"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@bugsnag/js": "^7.3.0",
