@@ -1,24 +1,5 @@
-# spotify-extract-albums
+# Spotify album extract
 
-## Project setup
-```
-yarn install
-```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0b0c6f5a-da87-4db2-8725-a88b7d020b14/deploy-status)](https://app.netlify.com/sites/inspiring-bhabha-225c26/deploys?branch=main)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[spotify-album-extract.com](https://spotify-album-extract.com)
