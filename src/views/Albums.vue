@@ -8,9 +8,7 @@
         type="is-text"
       ></b-button>
 
-      <h1>
-        <a v-if="playlist">{{ playlist.name }}</a>
-      </h1>
+      <h1>{{ playlist.name }}</h1>
 
       <b-dropdown aria-role="list">
         <template #trigger>
