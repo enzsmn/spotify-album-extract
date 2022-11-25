@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header>
+    <Header v-if="playlist">
       <b-button
         icon-left="angle-left"
         tag="router-link"
