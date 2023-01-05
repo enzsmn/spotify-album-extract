@@ -88,27 +88,17 @@ main {
 }
 
 footer {
-  height: 40px;
   align-items: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 5px;
 
   a {
-    align-items: center;
-    display: flex;
-    padding: 2px 3px;
+    margin: 2px;
+    padding: 3px;
 
-
-    & + a {
-      margin-left: 15px;
-      position: relative;
-
-      &::before {
-        position: absolute;
-        left: -12px;
-        content: '—';
-        pointer-events: none;
-      }
+    &:last-of-type {
+      opacity: .5;
     }
   }
 }

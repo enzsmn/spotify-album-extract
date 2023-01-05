@@ -1,26 +1,16 @@
 <template>
   <footer>
-    <a href="https://nozem.space" target="_blank" class="muted small">
-      &copy;
-      {{ year }} Nozem
-    </a>
-    <a
-      v-if="$route.meta.authenticated"
-      class="logout muted small"
-      @click="logout"
-    >
+    <a v-if="$route.meta.authenticated" class="small" @click="logout">
       Logout
+    </a>
+    <a href="https://nozem.space" target="_blank" class="muted small">
+      Nozem
     </a>
   </footer>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      year: new Date().getFullYear(),
-    };
-  },
   methods: {
     logout() {
       window.pa.track({ name: "Logout" });
