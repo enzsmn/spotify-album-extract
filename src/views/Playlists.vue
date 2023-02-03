@@ -5,7 +5,7 @@
 
       <b-button
         v-if="!showSearch"
-        icon-left="search"
+        icon-left="magnify"
         type="is-text"
         @click="toggleSearch(true)"
       ></b-button>
@@ -20,7 +20,7 @@
 
       <b-button
         v-if="showSearch"
-        icon-left="times"
+        icon-left="close"
         type="is-text"
         @click="toggleSearch(false)"
       ></b-button>

@@ -2,7 +2,7 @@
   <div>
     <Header v-if="playlist">
       <b-button
-        icon-left="angle-left"
+        icon-left="arrow-left"
         tag="router-link"
         :to="{ name: 'Playlists' }"
         type="is-text"
@@ -12,7 +12,7 @@
 
       <b-dropdown aria-role="list">
         <template #trigger>
-          <b-button icon-right="ellipsis-h" type="is-text" />
+          <b-button icon-right="dots-horizontal" type="is-text" />
         </template>
         <b-dropdown-item aria-role="listitem" @click="selectAll">
           Select all

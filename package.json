@@ -10,9 +10,6 @@
   "dependencies": {
     "@bugsnag/js": "^7.3.0",
     "@bugsnag/plugin-vue": "^7.3.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.36",
-    "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@fortawesome/vue-fontawesome": "^2.0.6",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.5.13",
     "@vue/cli-service": "^4.1.0",
