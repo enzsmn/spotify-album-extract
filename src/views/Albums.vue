@@ -10,17 +10,32 @@
 
       <h1>{{ playlist.name }}</h1>
 
-      <b-dropdown aria-role="list">
-        <template #trigger>
-          <b-button icon-right="dots-horizontal" type="is-text" />
-        </template>
-        <b-dropdown-item aria-role="listitem" @click="selectAll">
-          Select all
-        </b-dropdown-item>
-        <b-dropdown-item aria-role="listitem" @click="deselectAll">
-          Deselect all
-        </b-dropdown-item>
-      </b-dropdown>
+      <p v-if="albums.length > 0" class="muted small is-hidden-touch">
+        Selected {{ selectedAlbumsTracksCount }} tracks
+        <span v-if="selectedAlbumIds.length > 0">
+          in {{ selectedAlbumIds.length }}
+          {{ selectedAlbumIds.length === 1 ? "album" : "albums" }}
+        </span>
+      </p>
+
+      <b-button
+        v-if="!loading && selectedAlbumIds.length === albums.length"
+        icon-left="checkbox-marked-outline"
+        type="is-text"
+        @click="deselectAll"
+      ></b-button>
+      <b-button
+        v-else-if="!loading && selectedAlbumIds.length !== 0"
+        icon-left="minus-box-outline"
+        type="is-text"
+        @click="deselectAll"
+      ></b-button>
+      <b-button
+        v-else-if="!loading && selectedAlbumIds.length === 0"
+        icon-left="checkbox-blank-outline"
+        type="is-text"
+        @click="selectAll"
+      ></b-button>
 
       <b-dropdown aria-role="list" class="is-hidden-tablet">
         <template #trigger>
@@ -72,14 +87,6 @@
 
     <main class="container">
       <b-loading :active="loading"></b-loading>
-
-      <p v-if="albums.length > 0" class="muted small">
-        Selected {{ selectedAlbumsTracksCount }} tracks
-        <span v-if="selectedAlbumIds.length > 0">
-          in {{ selectedAlbumIds.length }}
-          {{ selectedAlbumIds.length === 1 ? "album" : "albums" }}
-        </span>
-      </p>
 
       <div v-if="albums.length > 0" class="albums">
         <Album

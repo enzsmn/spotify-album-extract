@@ -79,10 +79,6 @@ header {
       background: transparent;
       box-shadow: none !important;
     }
-
-    button + button {
-      margin-left: 6px;
-    }
   }
 }
 
@@ -275,10 +271,16 @@ h1 {
 
 .page-albums {
   header {
-    .button {
-      &.is-text {
-        margin-right: 5px;
-      }
+    .button.is-text {
+      box-shadow: none;
+    }
+
+    h1 {
+      margin-left: 6px;
+    }
+
+    .button.is-primary {
+      margin-left: 6px;
     }
   }
 }
