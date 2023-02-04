@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header v-if="playlist">
+    <Header>
       <b-button
         icon-left="arrow-left"
         tag="router-link"
@@ -8,7 +8,9 @@
         type="is-text"
       ></b-button>
 
-      <h1>{{ playlist.name }}</h1>
+      <h1>
+        <span v-if="playlist">{{ playlist.name }}</span>
+      </h1>
 
       <p v-if="albums.length > 0" class="muted small is-hidden-touch">
         Selected {{ selectedAlbumsTracksCount }} tracks
