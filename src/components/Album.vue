@@ -7,7 +7,7 @@
         <span>{{ album.artists.map((a) => a.name).join(", ") }}</span>
         <span class="small muted">
           {{ album.total_tracks }}
-          {{ album.total_tracks > 1 ? "tracks" : "track" }}
+          {{ album.total_tracks === 1 ? "track" : "tracks" }}
         </span>
       </div>
       <div>

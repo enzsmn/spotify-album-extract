@@ -9,7 +9,7 @@
         </span>
         <span class="small muted">
           {{ playlist.tracks.total }}
-          {{ playlist.tracks.total > 1 ? "tracks" : "track" }}
+          {{ playlist.tracks.total === 1 ? "track" : "tracks" }}
         </span>
       </div>
     </a>
