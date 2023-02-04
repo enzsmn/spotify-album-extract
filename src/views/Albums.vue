@@ -24,7 +24,13 @@
 
       <b-dropdown aria-role="list" class="is-hidden-tablet">
         <template #trigger>
-          <b-button icon-left="content-save" type="is-primary">Save</b-button>
+          <b-button
+            icon-left="content-save"
+            type="is-primary"
+            :loading="submitting"
+          >
+            Save
+          </b-button>
         </template>
         <b-dropdown-item
           aria-role="listitem"
@@ -45,8 +51,9 @@
       <b-button
         icon-left="pencil-plus"
         type="is-primary"
-        :disabled="selectedAlbumIds.length === 0"
         class="is-hidden-mobile"
+        :disabled="submitting || selectedAlbumIds.length === 0"
+        :loading="submitting"
         @click="createPlaylist"
       >
         Create playlist
@@ -55,8 +62,8 @@
       <b-button
         icon-left="playlist-plus"
         type="is-primary"
-        :disabled="selectedAlbumIds.length === 0"
         class="is-hidden-mobile"
+        :disabled="selectedAlbumIds.length === 0"
         @click="showSystemOwnerModal = true"
       >
         Add to playlist
@@ -113,6 +120,7 @@ export default {
   data() {
     return {
       loading: true,
+      submitting: false,
       showSystemOwnerModal: false,
       playlist: null,
       albums: [],
@@ -176,7 +184,7 @@ export default {
       this.selectedAlbumIds = [];
     },
     async createPlaylist() {
-      this.loading = true;
+      this.submitting = true;
 
       Bugsnag.leaveBreadcrumb("Save", {
         tracks: this.selectedAlbumIds.length,
@@ -189,7 +197,7 @@ export default {
         this.selectedAlbumIds
       );
 
-      this.loading = false;
+      this.submitting = false;
 
       this.$buefy.toast.open({
         message: "Playlist created",
