@@ -185,7 +185,7 @@ export default class SpotifyService {
     });
   }
 
-  async getAlbumTrackIds(albumId) {
+  async getAlbumTrackUris(albumId) {
     let tracks = [];
     let offset = 0;
 
@@ -222,7 +222,7 @@ export default class SpotifyService {
     const trackIds = [];
 
     for (const albumId of albumIds) {
-      const albumTrackIds = await this.getAlbumTrackIds(albumId);
+      const albumTrackIds = await this.getAlbumTrackUris(albumId);
       trackIds.push(...albumTrackIds);
     }
 
@@ -266,11 +266,11 @@ export default class SpotifyService {
   async addTracksToPlaylist(playlistId, trackIds, skipDuplicates = false) {
     if (skipDuplicates) {
       const tracksInPlaylist = await this.getPlaylistTracks(playlistId);
-      const tracksInPlaylistIds = tracksInPlaylist.map(
+      const tracksInPlaylistUris = tracksInPlaylist.map(
         (item) => item.track.uri
       );
 
-      trackIds = this.intersect(trackIds, tracksInPlaylistIds);
+      trackIds = this.intersect(trackIds, tracksInPlaylistUris);
     }
 
     const chunks = this.chunk(trackIds, 100);
