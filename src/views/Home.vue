@@ -1,5 +1,7 @@
 <template>
   <main>
+    <img src="/logo.png" />
+
     <h1>Spotify album extract</h1>
 
     <p>Select a playlist and get the full album from each track.</p>
