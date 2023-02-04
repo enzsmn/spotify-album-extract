@@ -141,6 +141,14 @@ export default class SpotifyService {
       });
   }
 
+  async getPlaylistAlbums(playlistId) {
+    const tracks = await this.getPlaylistTracks(playlistId);
+    const albums = tracks.map((item) => item.track.album);
+
+    // Remove duplicates
+    return [...new Map(albums.map((item) => [item.uri, item])).values()];
+  }
+
   async getPlaylistTracks(playlistId) {
     let tracks = [];
     let offset = 0;

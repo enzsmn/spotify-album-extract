@@ -151,15 +151,10 @@ export default {
 
     this.$spotify.getPlaylist(this.playlistId).then((playlist) => {
       this.playlist = playlist;
-      this.$spotify.getPlaylistTracks(this.playlistId).then((items) => {
-        items.forEach((item) => {
-          // Don't add albums twice (can happen if a playlists contains multiple track from the same album)
-          if (this.albums.find((a) => a.id === item.track.album.id)) {
-            return;
-          }
-          this.albums.push(item.track.album);
-          this.selectedAlbumIds.push(item.track.album.id);
-        });
+
+      this.$spotify.getPlaylistAlbums(this.playlistId).then((albums) => {
+        this.albums = albums;
+        this.selectedAlbumIds = albums.map((album) => album.id);
 
         this.loading = false;
       });
