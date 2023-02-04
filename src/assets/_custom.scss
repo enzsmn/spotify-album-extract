@@ -79,6 +79,10 @@ header {
       background: transparent;
       box-shadow: none !important;
     }
+
+    button + button {
+      margin-left: 6px;
+    }
   }
 }
 
@@ -219,6 +223,24 @@ h1 {
 
       .icon {
         opacity: 1;
+      }
+    }
+  }
+}
+
+.modal {
+  .card {
+    .card-content {
+      display: flex;
+      flex-direction: column;
+
+      .control {
+        margin-bottom: 14px;
+      }
+
+      .b-checkbox {
+        align-items: start;
+        margin-bottom: 20px;
       }
     }
   }

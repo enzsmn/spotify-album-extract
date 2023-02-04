@@ -22,14 +22,44 @@
         </b-dropdown-item>
       </b-dropdown>
 
+      <b-dropdown aria-role="list" class="is-hidden-tablet">
+        <template #trigger>
+          <b-button icon-left="content-save" type="is-primary">Save</b-button>
+        </template>
+        <b-dropdown-item
+          aria-role="listitem"
+          :disabled="selectedAlbumIds.length === 0"
+          @click="createPlaylist"
+        >
+          Create playlist
+        </b-dropdown-item>
+        <b-dropdown-item
+          aria-role="listitem"
+          :disabled="selectedAlbumIds.length === 0"
+          @click="showSystemOwnerModal = true"
+        >
+          Add to playlist
+        </b-dropdown-item>
+      </b-dropdown>
+
       <b-button
-        icon-left="plus"
+        icon-left="pencil-plus"
         type="is-primary"
-        class="create-playlist"
         :disabled="selectedAlbumIds.length === 0"
-        @click="save"
+        class="is-hidden-mobile"
+        @click="createPlaylist"
       >
         Create playlist
+      </b-button>
+
+      <b-button
+        icon-left="playlist-plus"
+        type="is-primary"
+        :disabled="selectedAlbumIds.length === 0"
+        class="is-hidden-mobile"
+        @click="showSystemOwnerModal = true"
+      >
+        Add to playlist
       </b-button>
     </Header>
 
@@ -49,7 +79,7 @@
           v-for="album in albums"
           :key="album.id"
           :album="album"
-          :selected-albums-ids="selectedAlbumIds"
+          :selected-album-ids="selectedAlbumIds"
           @clicked="selectOrDeselectAlbum"
         ></Album>
       </div>
@@ -58,6 +88,10 @@
         Empty playlist.
       </p>
     </main>
+
+    <b-modal v-model="showSystemOwnerModal" :width="320" scroll="keep">
+      <PlaylistModal :selected-album-ids="selectedAlbumIds"></PlaylistModal>
+    </b-modal>
   </div>
 </template>
 
@@ -65,10 +99,11 @@
 import Bugsnag from "@bugsnag/js";
 import Album from "../components/Album";
 import Header from "../components/Header";
+import PlaylistModal from "../components/PlaylistModal";
 
 export default {
   name: "Albums",
-  components: { Header, Album },
+  components: { Album, Header, PlaylistModal },
   props: {
     playlistId: {
       type: String,
@@ -78,6 +113,7 @@ export default {
   data() {
     return {
       loading: true,
+      showSystemOwnerModal: false,
       playlist: null,
       albums: [],
       selectedAlbumIds: [],
@@ -95,8 +131,8 @@ export default {
     },
   },
   watch: {
-    selectedAlbumsTracksCount(val) {
-      if (val >= 10000) {
+    selectedAlbumsTracksCount(value) {
+      if (value >= 10000) {
         this.$buefy.toast.open({
           message:
             "Spotify playlists have a 10000 tracks limit, some tracks might not be added",
@@ -144,7 +180,7 @@ export default {
     deselectAll() {
       this.selectedAlbumIds = [];
     },
-    async save() {
+    async createPlaylist() {
       this.loading = true;
 
       Bugsnag.leaveBreadcrumb("Save", {
@@ -154,7 +190,7 @@ export default {
       window.pa.track({ name: "Save" });
 
       await this.$spotify.createPlaylistWithAlbums(
-        this.playlist,
+        this.playlist.name,
         this.selectedAlbumIds
       );
 

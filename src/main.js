@@ -1,7 +1,7 @@
 import "./assets/app.scss";
 import "./plugins/axios";
-import "./plugins/bugsnag";
 import "./plugins/buefy";
+import "./plugins/bugsnag";
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App.vue";

@@ -3254,14 +3254,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buefy@npm:^0.8.10":
-  version: 0.8.20
-  resolution: "buefy@npm:0.8.20"
+"buefy@npm:^0.9.22":
+  version: 0.9.22
+  resolution: "buefy@npm:0.9.22"
   dependencies:
-    bulma: 0.7.5
+    bulma: 0.9.4
   peerDependencies:
-    vue: ^2.5.18
-  checksum: 9eb7d08b26212302ddacdc4d81484517f58e9d582a320304b8464222f432f35b11f5d2d019ed618a9c1ebae6bc3b8a8c660397af01ac20f6cdb2d66a10666a9a
+    vue: ^2.6.11
+  checksum: e0854c9f206ba58ee63999b38d758e6c0a78a847f2532d376e983fd1bd325a5b23e0370ec7259375ab49156521b8666e960596e25f713480761e966c6c9bca8a
   languageName: node
   linkType: hard
 
@@ -3311,10 +3311,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bulma@npm:0.7.5":
-  version: 0.7.5
-  resolution: "bulma@npm:0.7.5"
-  checksum: 5d08a00ea8da23ed325669fcc62ada5dc5bd1cbe347b231f12e68a6cb63944b4cee5ee5fe418a8c9dbf92f2c7b47382db6ce5395f0cc7248c727111aaf013225
+"bulma@npm:0.9.4":
+  version: 0.9.4
+  resolution: "bulma@npm:0.9.4"
+  checksum: bc0ab8c203deb0ae200fab5b38547ad4bc8ed1e3abcf6f4ac8a2229af46540419bbcb78c9d2e80f3ddda8825d64fa186ed8775674656cdcabe5544be4d0f3d85
   languageName: node
   linkType: hard
 
@@ -11225,7 +11225,7 @@ __metadata:
     axios: ^0.19.1
     babel-eslint: ^10.1.0
     babel-plugin-transform-remove-console: ^6.9.4
-    buefy: ^0.8.10
+    buefy: ^0.9.22
     core-js: ^3.4.4
     eslint: ^7.32.0
     eslint-plugin-prettier: ^4.0.0

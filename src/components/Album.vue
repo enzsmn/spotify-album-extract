@@ -24,7 +24,7 @@ export default {
       type: Object,
       required: true,
     },
-    selectedAlbumsIds: {
+    selectedAlbumIds: {
       type: Array,
       required: true,
     },
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     selected() {
-      return this.selectedAlbumsIds.includes(this.album.id);
+      return this.selectedAlbumIds.includes(this.album.id);
     },
   },
   mounted() {

@@ -28,7 +28,7 @@ export default class SpotifyService {
       )}`;
   }
 
-  requestToken(search) {
+  async requestToken(search) {
     const parsedQuery = new URLSearchParams(search.substr(1));
 
     if (!parsedQuery.get("code")) {
@@ -90,7 +90,7 @@ export default class SpotifyService {
     };
   }
 
-  getUserId() {
+  async getUserId() {
     axios
       .get(`${SPOTIFY_API}/me`)
       .then((response) => {
@@ -103,7 +103,7 @@ export default class SpotifyService {
       });
   }
 
-  getPlaylists() {
+  async getPlaylists() {
     let playlists = [];
     let offset = 0;
 
@@ -133,7 +133,7 @@ export default class SpotifyService {
     });
   }
 
-  getPlaylist(playlistId) {
+  async getPlaylist(playlistId) {
     return axios
       .get(`${SPOTIFY_API}/playlists/${playlistId}`)
       .then((response) => {
@@ -141,7 +141,7 @@ export default class SpotifyService {
       });
   }
 
-  getPlaylistTracks(playlistId) {
+  async getPlaylistTracks(playlistId) {
     let tracks = [];
     let offset = 0;
 
@@ -177,7 +177,7 @@ export default class SpotifyService {
     });
   }
 
-  getAlbumTrackIds(albumId) {
+  async getAlbumTrackIds(albumId) {
     let tracks = [];
     let offset = 0;
 
@@ -210,20 +210,7 @@ export default class SpotifyService {
     });
   }
 
-  createPlaylist(name) {
-    return axios
-      .post(`${SPOTIFY_API}/users/${this.userId}/playlists`, {
-        name: `${name} – Albums`,
-        public: false,
-        description: `Full albums from “${name}”`,
-      })
-      .then((response) => {
-        console.log("Created playlist", response.data.id);
-        return response.data.id;
-      });
-  }
-
-  async createPlaylistWithAlbums(selectedPlaylist, albumIds) {
+  async getAlbumsTrackIds(albumIds) {
     const trackIds = [];
 
     for (const albumId of albumIds) {
@@ -231,12 +218,53 @@ export default class SpotifyService {
       trackIds.push(...albumTrackIds);
     }
 
-    const playlistId = await this.createPlaylist(selectedPlaylist.name);
-
-    await this.addTracksToPlaylist(playlistId, trackIds);
+    return trackIds;
   }
 
-  async addTracksToPlaylist(playlistId, trackIds) {
+  async createPlaylist(name) {
+    return axios
+      .post(`${SPOTIFY_API}/users/${this.userId}/playlists`, {
+        name: `${name} – Albums`,
+        public: false,
+        description: `Full albums from “${name}”`,
+      })
+      .then((response) => {
+        return response.data.id;
+      });
+  }
+
+  async createPlaylistWithAlbums(playlistName, albumIds) {
+    const trackIds = await this.getAlbumsTrackIds(albumIds);
+
+    const playlistId = await this.createPlaylist(playlistName);
+
+    return await this.addTracksToPlaylist(playlistId, trackIds);
+  }
+
+  async addAlbumsToPlaylist(
+    selectedPlaylistId,
+    albumIds,
+    skipDuplicates = false
+  ) {
+    const trackIds = await this.getAlbumsTrackIds(albumIds);
+
+    return this.addTracksToPlaylist(
+      selectedPlaylistId,
+      trackIds,
+      skipDuplicates
+    );
+  }
+
+  async addTracksToPlaylist(playlistId, trackIds, skipDuplicates = false) {
+    if (skipDuplicates) {
+      const tracksInPlaylist = await this.getPlaylistTracks(playlistId);
+      const tracksInPlaylistIds = tracksInPlaylist.map(
+        (item) => item.track.uri
+      );
+
+      trackIds = this.intersect(trackIds, tracksInPlaylistIds);
+    }
+
     const chunks = this.chunk(trackIds, 100);
 
     for (const chunk of chunks) {
@@ -265,5 +293,11 @@ export default class SpotifyService {
     }
 
     return chunks;
+  }
+
+  intersect(array1, array2) {
+    return array1.filter(
+      (item1) => array2.findIndex((item2) => item1 === item2) === -1
+    );
   }
 }
