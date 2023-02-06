@@ -282,6 +282,12 @@ h1 {
   }
 }
 
+.loading-overlay {
+  .loading-background {
+    background: rgba(246, 251, 255, .5);
+  }
+}
+
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
