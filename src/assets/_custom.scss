@@ -19,16 +19,6 @@ a {
   user-select: none;
 }
 
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
 #app {
   min-height: 100vh;
 }
@@ -289,5 +279,15 @@ h1 {
     .button.is-primary {
       margin-left: 6px;
     }
+  }
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
