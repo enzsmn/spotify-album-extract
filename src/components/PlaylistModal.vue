@@ -85,6 +85,8 @@ export default {
             message: "Added to playlist",
             type: "is-primary",
           });
+
+          this.$parent.close();
         })
         .finally(() => {
           this.submitting = false;
