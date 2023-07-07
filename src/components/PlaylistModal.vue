@@ -18,7 +18,7 @@
       </b-select>
       <b-checkbox v-model="skipDuplicates">
         Skip duplicates<br />
-        <span class="muted small">This will take longer</span>
+        <span class="muted small">This might take longer</span>
       </b-checkbox>
       <b-button
         type="is-primary"
