@@ -24,6 +24,9 @@ export default class SpotifyService {
 
     const challenge = this.generateCodeChallenge(verifier);
 
+    const state = this.generateCodeVerifier();
+    sessionStorage.setItem("state", state);
+
     window.location =
       `${SPOTIFY_AUTH}/authorize` +
       `?response_type=code` +
@@ -32,12 +35,19 @@ export default class SpotifyService {
       `&scope=${encodeURI(
         "playlist-read-private playlist-read-collaborative playlist-modify-private"
       )}` +
+      `&state=${state}` +
       `&code_challenge_method=S256` +
       `&code_challenge=${challenge}`;
   }
 
   async requestToken(search) {
     const parsedQuery = new URLSearchParams(search.substr(1));
+
+    if (parsedQuery.get("state") === sessionStorage.getItem("state")) {
+      sessionStorage.removeItem("state");
+    } else {
+      throw new Error("Invalid state");
+    }
 
     if (!parsedQuery.get("code")) {
       throw new Error("Incomplete token");
