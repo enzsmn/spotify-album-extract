@@ -1,6 +1,7 @@
 import Bugsnag from "@bugsnag/js";
 import axios from "axios";
 import { ToastProgrammatic as Toast } from "buefy";
+import crypto from "crypto";
 import router from "../router/router";
 
 const SPOTIFY_API = "https://api.spotify.com/v1";
@@ -18,6 +19,11 @@ export default class SpotifyService {
   }
 
   async authenticate() {
+    const verifier = this.generateCodeVerifier();
+    sessionStorage.setItem("code_verifier", verifier);
+
+    const challenge = this.generateCodeChallenge(verifier);
+
     window.location =
       `${SPOTIFY_AUTH}/authorize` +
       `?response_type=code` +
@@ -25,7 +31,9 @@ export default class SpotifyService {
       `&redirect_uri=${encodeURI(this.callbackUrl)}` +
       `&scope=${encodeURI(
         "playlist-read-private playlist-read-collaborative playlist-modify-private"
-      )}`;
+      )}` +
+      `&code_challenge_method=S256` +
+      `&code_challenge=${challenge}`;
   }
 
   async requestToken(search) {
@@ -46,6 +54,8 @@ export default class SpotifyService {
           grant_type: "authorization_code",
           code: parsedQuery.get("code"),
           redirect_uri: this.callbackUrl,
+          client_id: process.env.VUE_APP_SPOTIFY_CLIENT_ID,
+          code_verifier: sessionStorage.getItem("code_verifier"),
         }),
         {
           headers: {
@@ -286,6 +296,8 @@ export default class SpotifyService {
     this.accessToken = null;
     this.userId = null;
 
+    sessionStorage.removeItem("code_verifier");
+
     router.push({ name: "Home" });
   }
 
@@ -307,5 +319,22 @@ export default class SpotifyService {
     return array1.filter(
       (item1) => array2.findIndex((item2) => item1 === item2) === -1
     );
+  }
+
+  base64URLEncode(str) {
+    return str
+      .toString("base64")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=/g, "");
+  }
+
+  generateCodeVerifier() {
+    return this.base64URLEncode(crypto.randomBytes(32));
+  }
+
+  generateCodeChallenge(verifier) {
+    const hash = crypto.createHash("sha256").update(verifier).digest();
+    return this.base64URLEncode(hash);
   }
 }
