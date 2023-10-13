@@ -70,7 +70,7 @@ export default {
         tracks: this.selectedAlbumIds.length,
       });
 
-      window.pa.track({ name: "Add to playlist" });
+      window.pa?.track({ name: "Add to playlist" });
 
       this.submitting = true;
 

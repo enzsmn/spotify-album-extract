@@ -13,7 +13,7 @@
 export default {
   methods: {
     logout() {
-      window.pa.track({ name: "Logout" });
+      window.pa?.track({ name: "Logout" });
 
       this.$spotify.logout();
     },

@@ -17,7 +17,7 @@ export default {
   name: "Home",
   methods: {
     auth() {
-      window.pa.track({ name: "Authorize" });
+      window.pa?.track({ name: "Authorize" });
 
       this.$spotify.authenticate();
     },

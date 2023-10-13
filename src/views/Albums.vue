@@ -199,7 +199,7 @@ export default {
         tracks: this.selectedAlbumIds.length,
       });
 
-      window.pa.track({ name: "Save" });
+      window.pa?.track({ name: "Save" });
 
       await this.$spotify.createPlaylistWithAlbums(
         this.playlist.name,
