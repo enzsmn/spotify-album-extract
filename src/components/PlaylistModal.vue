@@ -16,10 +16,6 @@
           {{ playlist.name }}
         </option>
       </b-select>
-      <b-checkbox v-model="skipDuplicates">
-        Skip duplicates<br />
-        <span class="muted small">This might take longer</span>
-      </b-checkbox>
       <b-button
         type="is-primary"
         :disabled="!selectedPlaylistId"
@@ -48,7 +44,6 @@ export default {
       loading: true,
       submitting: false,
       playlists: [],
-      skipDuplicates: true,
       selectedPlaylistId: null,
     };
   },
@@ -75,11 +70,7 @@ export default {
       this.submitting = true;
 
       this.$spotify
-        .addAlbumsToPlaylist(
-          this.selectedPlaylistId,
-          this.selectedAlbumIds,
-          this.skipDuplicates
-        )
+        .addAlbumsToPlaylist(this.selectedPlaylistId, this.selectedAlbumIds)
         .then(() => {
           this.$buefy.toast.open({
             message: "Added to playlist",

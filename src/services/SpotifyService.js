@@ -260,18 +260,10 @@ export default class SpotifyService {
     return await this.addTracksToPlaylist(playlistId, trackIds);
   }
 
-  async addAlbumsToPlaylist(
-    selectedPlaylistId,
-    albumIds,
-    skipDuplicates = false
-  ) {
+  async addAlbumsToPlaylist(selectedPlaylistId, albumIds) {
     const trackIds = await this.getAlbumsTrackIds(albumIds);
 
-    return this.addTracksToPlaylist(
-      selectedPlaylistId,
-      trackIds,
-      skipDuplicates
-    );
+    return this.addTracksToPlaylist(selectedPlaylistId, trackIds, true);
   }
 
   async addTracksToPlaylist(playlistId, trackIds, skipDuplicates = false) {
