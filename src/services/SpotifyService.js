@@ -19,11 +19,6 @@ export default class SpotifyService {
   }
 
   async authenticate() {
-    const verifier = this.generateCodeVerifier();
-    sessionStorage.setItem("code_verifier", verifier);
-
-    const challenge = this.generateCodeChallenge(verifier);
-
     const state = this.generateCodeVerifier();
     sessionStorage.setItem("state", state);
 
@@ -35,9 +30,7 @@ export default class SpotifyService {
       `&scope=${encodeURI(
         "playlist-read-private playlist-read-collaborative playlist-modify-private"
       )}` +
-      `&state=${state}` +
-      `&code_challenge_method=S256` +
-      `&code_challenge=${challenge}`;
+      `&state=${state}`;
   }
 
   async requestToken(search) {
@@ -64,8 +57,6 @@ export default class SpotifyService {
           grant_type: "authorization_code",
           code: parsedQuery.get("code"),
           redirect_uri: this.callbackUrl,
-          client_id: process.env.VUE_APP_SPOTIFY_CLIENT_ID,
-          code_verifier: sessionStorage.getItem("code_verifier"),
         }),
         {
           headers: {
@@ -306,8 +297,6 @@ export default class SpotifyService {
     this.accessToken = null;
     this.userId = null;
 
-    sessionStorage.removeItem("code_verifier");
-
     router.push({ name: "Home" });
   }
 
@@ -341,10 +330,5 @@ export default class SpotifyService {
 
   generateCodeVerifier() {
     return this.base64URLEncode(crypto.randomBytes(32));
-  }
-
-  generateCodeChallenge(verifier) {
-    const hash = crypto.createHash("sha256").update(verifier).digest();
-    return this.base64URLEncode(hash);
   }
 }
