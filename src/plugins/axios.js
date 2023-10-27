@@ -15,7 +15,7 @@ axios.interceptors.response.use(
       error.response.data?.error?.message,
     ].join(": ");
 
-    Bugsnag.notify(message);
+    Bugsnag?.notify(message);
 
     console.log(message);
 

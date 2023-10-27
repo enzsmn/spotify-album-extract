@@ -101,7 +101,7 @@ export default {
       });
     },
     selectPlaylist(playlist) {
-      Bugsnag.leaveBreadcrumb("Selected playlist", {
+      Bugsnag?.leaveBreadcrumb("Selected playlist", {
         tracks: playlist.tracks.total,
       });
 

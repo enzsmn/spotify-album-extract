@@ -14,7 +14,7 @@ export default {
         this.$router.push({ name: "Playlists" });
       })
       .catch((e) => {
-        Bugsnag.notify(e);
+        Bugsnag?.notify(e);
 
         this.$buefy.toast.open({
           message: "Something went wrong",

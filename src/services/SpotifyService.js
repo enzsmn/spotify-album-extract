@@ -108,7 +108,7 @@ export default class SpotifyService {
         this.userId = response.data.id;
       })
       .catch((error) => {
-        Bugsnag.notify(error);
+        Bugsnag?.notify(error);
 
         this.logout();
       });

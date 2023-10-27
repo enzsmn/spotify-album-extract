@@ -195,7 +195,7 @@ export default {
     async createPlaylist() {
       this.submitting = true;
 
-      Bugsnag.leaveBreadcrumb("Save", {
+      Bugsnag?.leaveBreadcrumb("Save", {
         tracks: this.selectedAlbumIds.length,
       });
 

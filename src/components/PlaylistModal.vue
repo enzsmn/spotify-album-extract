@@ -61,7 +61,7 @@ export default {
       });
     },
     async addToPlaylist() {
-      Bugsnag.leaveBreadcrumb("Add to playlist", {
+      Bugsnag?.leaveBreadcrumb("Add to playlist", {
         tracks: this.selectedAlbumIds.length,
       });
 
