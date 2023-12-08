@@ -3,8 +3,11 @@
     <a @click="$emit('select', playlist)">
       <img :src="image" :alt="playlist.name" />
       <div>
-        <strong>{{ playlist.name }}</strong>
-        <span v-if="userId && userId !== playlist.owner.id">
+        <strong :title="playlist.name">{{ playlist.name }}</strong>
+        <span
+          v-if="userId && userId !== playlist.owner.id"
+          :title="playlist.owner.display_name"
+        >
           {{ playlist.owner.display_name }}
         </span>
         <span class="small muted">

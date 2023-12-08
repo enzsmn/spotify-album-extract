@@ -3,8 +3,8 @@
     <a @click="$emit('clicked', album)">
       <img :src="image" :alt="album.name" />
       <div>
-        <strong>{{ album.name }}</strong>
-        <span>{{ album.artists.map((a) => a.name).join(", ") }}</span>
+        <strong :title="album.name">{{ album.name }}</strong>
+        <span :title="artists">{{ artists }}</span>
         <span class="small muted">
           {{ album.total_tracks }}
           {{ album.total_tracks === 1 ? "track" : "tracks" }}
@@ -37,6 +37,9 @@ export default {
   computed: {
     selected() {
       return this.selectedAlbumIds.includes(this.album.id);
+    },
+    artists() {
+      return this.album.artists.map((a) => a.name).join(", ");
     },
   },
   mounted() {
