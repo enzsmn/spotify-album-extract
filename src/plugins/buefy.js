@@ -6,6 +6,7 @@ import {
   Input,
   Loading,
   Modal,
+  Notification,
   Select,
   Toast,
 } from "buefy";
@@ -18,5 +19,6 @@ Vue.use(Icon);
 Vue.use(Input);
 Vue.use(Loading);
 Vue.use(Modal);
+Vue.use(Notification);
 Vue.use(Select);
 Vue.use(Toast);

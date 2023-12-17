@@ -90,6 +90,15 @@
     <main class="container">
       <b-loading :active="loading"></b-loading>
 
+      <b-notification
+        v-if="showTooManyTracksNotification"
+        type="is-warning"
+        aria-close-label="Close notification"
+      >
+        Spotify playlists have a 10000 tracks limit, your selection exceeds this
+        amount.
+      </b-notification>
+
       <div v-if="albums.length > 0" class="albums">
         <Album
           v-for="album in albums"
@@ -146,16 +155,8 @@ export default {
         });
       return count;
     },
-  },
-  watch: {
-    selectedAlbumsTracksCount(value) {
-      if (value >= 10000) {
-        this.$buefy.toast.open({
-          message:
-            "Spotify playlists have a 10000 tracks limit, some tracks might not be added",
-          type: "is-warning",
-        });
-      }
+    showTooManyTracksNotification() {
+      return this.selectedAlbumsTracksCount >= 10000;
     },
   },
   mounted() {
