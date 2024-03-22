@@ -116,15 +116,16 @@ export default class SpotifyService {
 
   async getPlaylists() {
     let playlists = [];
+    const limit = 50;
     let offset = 0;
 
     return new Promise((resolve) => {
       const callback = () => {
         axios
-          .get(`${SPOTIFY_API}/me/playlists?limit=50&offset=${offset}`)
+          .get(`${SPOTIFY_API}/me/playlists?limit=${limit}&offset=${offset}`)
           .then((response) => {
             playlists.push(...response.data.items);
-            offset += response.data.items.length;
+            offset += limit;
 
             if (response.data.total > offset) {
               if (offset % 200 === 0) {
