@@ -4,7 +4,7 @@
       Logout
     </a>
     <a href="https://nozem.space" target="_blank" class="muted small">
-      Nozem
+      Made by <strong>Nozem</strong>
     </a>
   </footer>
 </template>
