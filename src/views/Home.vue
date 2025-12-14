@@ -4,7 +4,7 @@
 
     <h1>Spotify album extract</h1>
 
-    <p>Select a playlist and get the full album from each track.</p>
+    <p>Turn your playlists into collections of complete releases!</p>
 
     <b-button type="is-primary is-rounded" @click="auth">
       Load your playlists
