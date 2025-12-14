@@ -1,7 +1,6 @@
 import Bugsnag from "@bugsnag/js";
 import axios from "axios";
 import { ToastProgrammatic as Toast } from "buefy";
-import crypto from "crypto";
 import router from "../router/router";
 
 const SPOTIFY_API = "https://api.spotify.com/v1";
@@ -313,15 +312,12 @@ export default class SpotifyService {
     );
   }
 
-  base64URLEncode(str) {
-    return str
-      .toString("base64")
+  generateCodeVerifier() {
+    return btoa(
+      String.fromCharCode(...crypto.getRandomValues(new Uint8Array(32)))
+    )
       .replace(/\+/g, "-")
       .replace(/\//g, "_")
-      .replace(/=/g, "");
-  }
-
-  generateCodeVerifier() {
-    return this.base64URLEncode(crypto.randomBytes(32));
+      .replace(/=+$/g, "");
   }
 }

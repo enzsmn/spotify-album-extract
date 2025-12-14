@@ -10,9 +10,9 @@
   "dependencies": {
     "@bugsnag/js": "^7.3.0",
     "@bugsnag/plugin-vue": "^7.3.0",
-    "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-plugin-eslint": "^4.5.13",
-    "@vue/cli-service": "^4.1.0",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-prettier": "^6.0.0",
     "axios": "^0.19.1",
     "babel-eslint": "^10.1.0",
@@ -23,9 +23,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-vue": "^7.18.0",
-    "node-sass": "^6.0.1",
     "sass": "^1.42.1",
-    "sass-loader": "^10",
+    "sass-loader": "^13.3.2",
     "vue": "^2.6.10",
     "vue-router": "^3.1.5",
     "vue-template-compiler": "^2.6.10"
