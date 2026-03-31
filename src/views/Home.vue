@@ -1,6 +1,9 @@
 <template>
   <main>
-    <img src="/logo.png" />
+    <picture>
+      <source srcset="/logo-white.png" media="(prefers-color-scheme: dark)" />
+      <img src="/logo.png" />
+    </picture>
 
     <h1>Spotify album extract</h1>
 

@@ -304,3 +304,59 @@ h1 {
     opacity: 1;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: rgb(25, 20, 20);
+    color: rgb(246, 251, 255);
+  }
+
+  header {
+    background: rgb(25, 20, 20);
+
+    input {
+      border-color: rgb(246, 251, 255) !important;
+      color: rgb(246, 251, 255) !important;
+    }
+  }
+
+  a {
+    color: rgb(246, 251, 255) !important;
+  }
+
+  .modal {
+    .card {
+      background: rgb(25, 20, 20);
+
+      .select {
+        select {
+          background: rgb(25, 20, 20);
+          color: rgb(246, 251, 255);
+        }
+
+        &::after {
+          border-color: rgb(246, 251, 255);
+        }
+      }
+    }
+  }
+
+  .dropdown-content {
+    background: rgb(25, 20, 20);
+
+    .dropdown-item {
+      &:hover {
+        background: $primary;
+      }
+    }
+  }
+
+  .button.is-text {
+    background: rgb(25, 20, 20) !important;
+    color: rgb(246, 251, 255) !important;
+  }
+
+  .loading-background {
+    background: rgba(25, 20, 20, .5) !important;
+  }
+}
