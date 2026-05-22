@@ -317,6 +317,10 @@ h1 {
     input {
       border-color: rgb(246, 251, 255) !important;
       color: rgb(246, 251, 255) !important;
+
+      &::placeholder {
+        color: rgba(246, 251, 255, .5) !important;
+      }
     }
   }
 
