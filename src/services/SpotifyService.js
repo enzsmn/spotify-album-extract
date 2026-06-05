@@ -114,7 +114,7 @@ export default class SpotifyService {
   }
 
   async getPlaylists() {
-    let playlists = [];
+    const playlists = new Map();
     const limit = 50;
     let offset = 0;
 
@@ -123,7 +123,8 @@ export default class SpotifyService {
         axios
           .get(`${SPOTIFY_API}/me/playlists?limit=${limit}&offset=${offset}`)
           .then((response) => {
-            playlists.push(...response.data.items);
+            response.data.items.forEach((item) => playlists.set(item.id, item));
+
             offset += limit;
 
             if (response.data.total > offset) {
@@ -133,14 +134,12 @@ export default class SpotifyService {
                 callback();
               }
             } else {
-              resolve();
+              resolve([...playlists.values()]);
             }
           });
       };
 
       callback();
-    }).then(() => {
-      return playlists;
     });
   }
 
